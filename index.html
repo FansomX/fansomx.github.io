@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fan Xiao — Homepage</title>
+  <meta name="description" content="Fan Xiao · Medical Physics PhD · AI researcher. Projects, CV, Google Scholar, GitHub." />
+  <style>
+    /* —— 简单自适应样式：复制即可 —— */
+    :root { --bg:#0b0b0f; --fg:#e6e6e6; --muted:#9aa0a6; --card:#14141a; --border:#23232b; --accent:#4f8cff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background:linear-gradient(180deg,#0b0b0f,#0b0b0f 40%,#111118); color:var(--fg); }
+    a { color: var(--fg); text-decoration: none; }
+    img { max-width: 100%; display:block; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 16px; }
+    .header { position: sticky; top:0; backdrop-filter: blur(8px); background: rgba(11,11,15,.6); border-bottom:1px solid var(--border); }
+    .row { display:flex; align-items:center; gap:16px; justify-content: space-between; }
+    .avatar { width:56px; height:56px; border-radius:50%; object-fit:cover; border:2px solid var(--border); }
+    .title { font-size:18px; font-weight:600; margin:0; }
+    .tagline { margin:2px 0 0; font-size:12px; color:var(--muted); }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); background:var(--card); border-radius:10px; font-size:14px; }
+    .btn.primary { background: var(--accent); color:#fff; border-color:transparent; }
+    .btn:hover { filter: brightness(1.05); }
+
+    .hero { padding: 32px 0; display:grid; grid-template-columns: 1fr; gap:16px; }
+    .hero .left h1{ font-size:28px; margin:0 0 8px; }
+    .hero .left p{ color:var(--muted); line-height:1.6; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .chip { font-size:12px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background: #121219; color:#cfd3dc; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; }
+
+    .grid { display:grid; gap:12px; }
+    @media (min-width: 800px) {
+      .hero { grid-template-columns: 2fr 1fr; }
+      .cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .cols-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .section h2{ font-size:20px; margin: 0 0 8px; }
+    .muted { color:var(--muted); font-size:14px; }
+    .proj-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+    .tag{ font-size:11px; padding:4px 8px; background:#0f0f15; border:1px solid var(--border); border-radius:999px; color:#cfd3dc; }
+    .footer { color:var(--muted); font-size:14px; padding:24px 0 48px; }
+    .actions{ display:flex; gap:8px; flex-wrap:wrap; }
+    .nowrap{ white-space:nowrap; }
+  </style>
+</head>
+<body>
+  <!-- —— 顶部导航 —— -->
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="row" style="gap:12px;">
+          <img class="avatar" src="REPLACE_WITH_YOUR_PHOTO.jpg" alt="Fan Xiao" />
+          <div>
+            <p class="title">Fan Xiao</p>
+            <p class="tagline">Medical Physics PhD · AI Researcher · Munich</p>
+          </div>
+        </div>
+        <nav class="actions">
+          <a class="btn" href="cv_fan_xiao.pdf" target="_blank">CV</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank">Google Scholar</a>
+          <a class="btn" href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a>
+          <a class="btn primary" href="mailto:YOUR_EMAIL@example.com">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- —— 头图区 —— -->
+  <main class="container">
+    <section class="hero">
+      <div class="left">
+        <h1>AI‑driven Dose Calculation and Adaptive Radiotherapy</h1>
+        <p>
+          Focus: photon segment dose prediction, BEV↔patient‑coordinate interpolation,
+          and millisecond‑level kernels for online ART. Open‑source and reproducibility first.
+        </p>
+        <div class="chips">
+          <span class="chip">Medical Physics</span>
+          <span class="chip">PyTorch</span>
+          <span class="chip">CUDA / CuPy</span>
+          <span class="chip">Geant4</span>
+          <span class="chip">VMAT / IMRT</span>
+        </div>
+        <div style="margin-top:12px;" class="actions">
+          <a class="btn primary" href="cv_fan_xiao.pdf" target="_blank">Download CV</a>
+          <a class="btn" href="https://github.com/YOUR_USERNAME" target="_blank">View GitHub</a>
+        </div>
+      </div>
+      <aside>
+        <div class="card">
+          <p style="margin:0 0 8px; font-weight:600;">Current work</p>
+          <ul class="muted" style="margin:0; padding-left:18px; line-height:1.6;">
+            <li>Open benchmark for segment dose models (ConvLSTM/Transformer/UNet).</li>
+            <li>Sub‑second inference with custom kernels.</li>
+            <li>Geant4 validation and γ analysis.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- —— 论文 —— -->
+    <section class="section" style="margin-top:20px;">
+      <h2>Selected publications</h2>
+      <p class="muted">完整列表见 <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" style="text-decoration:underline;">Google Scholar</a></p>
+      <div class="grid">
+        <div class="card">
+          <p style="margin:0 0 4px;"><a href="#" target="_blank" style="text-decoration:underline;">Unified comparative protocol for photon segment dose prediction</a></p>
+          <p class="muted" style="margin:0;">F. Xiao*, et al. · Physica Medica, 2025 (under review)</p>
+        </div>
+        <div class="card">
+          <p style="margin:0 0 4px;"><a href="#" target="_blank" style="text-decoration:underline;">Millisecond kernels for adaptive radiotherapy</a></p>
+          <p class="muted" style="margin:0;">F. Xiao*, et al. · Medical Physics, 2024</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- —— 项目 —— -->
+    <section class="section" style="margin-top:20px;">
+      <h2>Featured projects</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <p style="margin:0 0 6px; font-weight:600;">ConvLSTM‑based BEV Dose Prediction</p>
+          <p class="muted" style="margin:0 0 8px;">Open benchmark with reproducible pipelines (PyTorch/CuPy, sub‑second inference).</p>
+          <div class="proj-tags">
+            <span class="tag">PyTorch</span><span class="tag">CuPy</span><span class="tag">DoseCalc</span>
+          </div>
+          <p style="margin-top:10px;"><a class="btn" href="https://github.com/YOUR_USERNAME/conv-lstm-bev-dose" target="_blank">Code</a></p>
+        </div>
+        <div class="card">
+          <p style="margin:0 0 6px; font-weight:600;">Geant4 Photon Segment Simulator</p>
+          <p class="muted" style="margin:0 0 8px;">Modular Geant4/ITK tooling for VMAT/IMRT segment simulation and dose accumulation.</p>
+          <div class="proj-tags">
+            <span class="tag">Geant4</span><span class="tag">C++</span><span class="tag">ITK</span>
+          </div>
+          <p style="margin-top:10px;"><a class="btn" href="https://github.com/YOUR_USERNAME/geant4-segment-sim" target="_blank">Code</a></p>
+        </div>
+        <div class="card">
+          <p style="margin:0 0 6px; font-weight:600;">Adaptive ART Pipeline</p>
+          <p class="muted" style="margin:0 0 8px;">End‑to‑end online ART prototype with ms‑level kernels and deployment scripts.</p>
+          <div class="proj-tags">
+            <span class="tag">CUDA</span><span class="tag">Kernels</span><span class="tag">Deployment</span>
+          </div>
+          <p style="margin-top:10px;"><a class="btn" href="https://github.com/YOUR_USERNAME/online-art-pipeline" target="_blank">Code</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- —— 联系 —— -->
+    <section class="section" style="margin-top:20px;">
+      <h2>Contact</h2>
+      <p class="muted">Email：<a href="mailto:YOUR_EMAIL@example.com" style="text-decoration:underline;">YOUR_EMAIL@example.com</a></p>
+    </section>
+
+    <footer class="footer">
+      <hr style="border:0; border-top:1px solid var(--border); margin:16px 0 12px;"/>
+      <div class="row">
+        <span>© <span id="year"></span> Fan Xiao · Munich</span>
+        <div class="actions">
+          <a class="btn" href="cv_fan_xiao.pdf" target="_blank">CV</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank">Scholar</a>
+          <a class="btn" href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
