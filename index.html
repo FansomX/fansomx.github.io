@@ -3,247 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fan Xiao | Medical Physics PhD</title>
-  
+  <title>Fan Xiao | Medical Physics PhD student</title>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
   <style>
-    /* 1. 全局与主题样式 (Global & Theme Styles) */
-    :root {
-      --dark-navy: #0a192f;
-      --light-navy: #112240;
-      --lightest-navy: #233554;
-      --slate: #8892b0;
-      --light-slate: #a8b2d1;
-      --lightest-slate: #ccd6f6;
-      --white: #e6f1ff;
-      --green: #64ffda; /* 重点色 */
+    :root{
+      --dark-navy:#0a192f;--light-navy:#112240;--lightest-navy:#233554;
+      --slate:#8892b0;--light-slate:#a8b2d1;--lightest-slate:#ccd6f6;
+      --white:#e6f1ff;--green:#64ffda;
     }
-
-    html {
-      scroll-behavior: smooth; /* 平滑滚动 */
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      color: var(--slate);
-      background-color: var(--dark-navy);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* 2. 整体布局 (Main Layout) */
-    .container {
-      display: flex;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .left-panel {
-      width: 45%;
-      height: 100vh;
-      position: sticky;
-      top: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 60px;
-      box-sizing: border-box;
-    }
-
-    .right-panel {
-      width: 55%;
-      padding: 60px;
-      box-sizing: border-box;
-    }
-
-    /* 3. 左侧面板内容 (Left Panel Content) */
-    .left-panel h1 {
-      color: var(--white);
-      font-size: 48px;
-      margin: 0;
-    }
-
-    .left-panel h2 {
-      color: var(--lightest-slate);
-      font-size: 22px;
-      margin-top: 8px;
-    }
-
-    .left-panel .subtitle {
-      color: var(--slate);
-      margin-top: 16px;
-      max-width: 400px;
-    }
-    
-    .main-nav {
-      list-style: none;
-      padding: 0;
-      margin-top: 40px;
-    }
-
-    .main-nav li {
-      margin-bottom: 10px;
-    }
-
-    .main-nav a {
-      color: var(--slate);
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.2s ease-in-out;
-      display: flex;
-      align-items: center;
-    }
-    
-    .main-nav a .nav-line {
-      width: 30px;
-      height: 1px;
-      background-color: var(--slate);
-      margin-right: 15px;
-      transition: all 0.2s ease-in-out;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      color: var(--white);
-    }
-
-    .main-nav a:hover .nav-line,
-    .main-nav a.active .nav-line {
-      width: 60px;
-      background-color: var(--white);
-    }
-    
-    .social-links {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      gap: 20px;
-    }
-
-    .social-links a {
-      color: var(--slate);
-      font-size: 24px;
-      transition: all 0.2s ease-in-out;
-    }
-
-    .social-links a:hover {
-      color: var(--green);
-      transform: translateY(-3px);
-    }
-
-    /* 4. 右侧面板内容 (Right Panel Content) */
-    section {
-      margin-bottom: 100px;
-      /* 为JS动画准备的初始状态 */
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-
-    section.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-title {
-      font-size: 22px;
-      color: var(--lightest-slate);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-    }
-    
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 200px;
-      height: 1px;
-      background-color: var(--lightest-navy);
-      margin-left: 20px;
-    }
-    
-    a {
-      color: var(--green);
-      text-decoration: none;
-      position: relative;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .project-card, .publication-item {
-      background-color: var(--light-navy);
-      padding: 20px;
-      border-radius: 4px;
-      margin-bottom: 15px;
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-
-    .project-card:hover, .publication-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-    }
-
-    .project-card h3, .publication-item h3 {
-      margin: 0 0 10px 0;
-      font-size: 18px;
-    }
-    
-    .project-card h3 a, .publication-item h3 a {
-      color: var(--white);
-      transition: color 0.2s ease;
-    }
-    
-    .project-card h3 a:hover, .publication-item h3 a:hover {
-      color: var(--green);
-      text-decoration: none;
-    }
-
-    .tech-stack {
-      list-style: none;
-      padding: 0;
-      margin-top: 15px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      font-size: 13px;
-      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-      color: var(--light-slate);
-    }
-
-    .publication-info {
-        font-size: 14px;
-        color: var(--light-slate);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: var(--slate);
-      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-    }
-
-    /* 5. 媒体查询 (Media Queries for Responsiveness) */
-    @media (max-width: 1080px) {
-      .container {
-        flex-direction: column;
-      }
-      .left-panel, .right-panel {
-        width: 100%;
-        position: static;
-        height: auto;
-        padding: 40px;
-      }
-      .left-panel {
-        padding-bottom: 0;
-      }
-      .main-nav {
-        display: none; /* 在小屏幕上隐藏导航，因为页面不再分栏 */
-      }
+    html{scroll-behavior:smooth}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;line-height:1.6;margin:0;color:var(--slate);background-color:var(--dark-navy);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    .container{display:flex;max-width:1400px;margin:0 auto}
+    .left-panel{width:45%;height:100vh;position:sticky;top:0;display:flex;flex-direction:column;justify-content:space-between;padding:60px;box-sizing:border-box}
+    .right-panel{width:55%;padding:60px;box-sizing:border-box}
+    .left-panel h1{color:var(--white);font-size:48px;margin:0}
+    .left-panel h2{color:var(--lightest-slate);font-size:22px;margin-top:8px}
+    .left-panel .subtitle{color:var(--slate);margin-top:16px;max-width:400px}
+    .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid var(--lightest-navy);margin:16px 0}
+    .main-nav{list-style:none;padding:0;margin-top:24px}
+    .main-nav li{margin-bottom:10px}
+    .main-nav a{color:var(--slate);text-decoration:none;font-weight:bold;transition:all .2s;display:flex;align-items:center}
+    .main-nav a .nav-line{width:30px;height:1px;background-color:var(--slate);margin-right:15px;transition:all .2s}
+    .main-nav a:hover,.main-nav a.active{color:var(--white)}
+    .main-nav a:hover .nav-line,.main-nav a.active .nav-line{width:60px;background-color:var(--white)}
+    .social-links{list-style:none;padding:0;display:flex;gap:20px}
+    .social-links a{color:var(--slate);font-size:24px;transition:all .2s}
+    .social-links a:hover{color:var(--green);transform:translateY(-3px)}
+    section{margin-bottom:100px;opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}
+    section.is-visible{opacity:1;transform:translateY(0)}
+    .section-title{font-size:22px;color:var(--lightest-slate);margin-bottom:24px;display:flex;align-items:center}
+    .section-title::after{content:'';display:block;width:200px;height:1px;background-color:var(--lightest-navy);margin-left:20px}
+    a{color:var(--green);text-decoration:none;position:relative}
+    a:hover{text-decoration:underline}
+    .project-card,.publication-item{background-color:var(--light-navy);padding:20px;border-radius:4px;margin-bottom:15px;transition:transform .2s,box-shadow .2s}
+    .project-card:hover,.publication-item:hover{transform:translateY(-5px);box-shadow:0 10px 30px -15px rgba(2,12,27,.7)}
+    .project-card h3,.publication-item h3{margin:0 0 10px 0;font-size:18px}
+    .project-card h3 a,.publication-item h3 a{color:var(--white);transition:color .2s}
+    .project-card h3 a:hover,.publication-item h3 a:hover{color:var(--green);text-decoration:none}
+    .tech-stack{list-style:none;padding:0;margin-top:15px;display:flex;flex-wrap:wrap;gap:15px;font-size:13px;font-family:'SF Mono','Fira Code','Fira Mono','Roboto Mono',monospace;color:var(--light-slate)}
+    .publication-info{font-size:14px;color:var(--light-slate)}
+    footer{text-align:center;font-size:12px;color:var(--slate);font-family:'SF Mono','Fira Code','Fira Mono','Roboto Mono',monospace}
+    @media (max-width:1080px){
+      .container{flex-direction:column}
+      .left-panel,.right-panel{width:100%;position:static;height:auto;padding:40px}
+      .left-panel{padding-bottom:0}
+      .main-nav{display:none}
     }
   </style>
 </head>
@@ -254,10 +58,14 @@
       <div>
         <h1>Fan Xiao</h1>
         <h2>Medical Physics PhD & AI Researcher</h2>
+
+        <!-- 头像：assets/Fan.jpeg -->
+        <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
+
         <p class="subtitle">
           Focusing on photon segment dose prediction, BEV↔patient interpolation, and developing millisecond kernels for online adaptive radiotherapy.
         </p>
-        
+
         <ul class="main-nav">
           <li><a href="#about" class="nav-link"><span class="nav-line"></span><span>关于</span></a></li>
           <li><a href="#projects" class="nav-link"><span class="nav-line"></span><span>项目</span></a></li>
@@ -266,9 +74,8 @@
       </div>
 
       <ul class="social-links">
-        <li><a href="cv_fan_xiao.pdf" target="_blank" title="CV">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2 4v2h12V7H6zm0 4v2h12v-2H6zm0 4v2h8v-2H6z"/></svg>
-        </a></li>
+        <!-- 如不需要CV可删除此项；若保留需在根目录放 cv_fan_xiao.pdf -->
+        <!-- <li><a href="cv_fan_xiao.pdf" target="_blank" title="CV">…</a></li> -->
         <li><a href="https://scholar.google.de/citations?hl=de&pli=1&user=jhjXYpMAAAAJ" target="_blank" title="Google Scholar">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 24c-2.4 0-4.8-1-6.7-2.8-1.9-1.8-3.1-4.3-3.1-7 0-2.2.8-4.2 2.3-5.9L12 0l7.5 8.3c1.5 1.7 2.3 3.7 2.3 5.9 0 2.7-1.2 5.2-3.1 7C16.8 23 14.4 24 12 24zM12 4.8L7.5 9l4.5 5 4.5-5-4.5-4.2z"/></svg>
         </a></li>
@@ -284,55 +91,38 @@
     <main class="right-panel">
       <section id="about" class="fade-in-section">
         <h2 class="section-title">关于我 (About)</h2>
-        <p>
-          我是一名在德国慕尼黑工作的医学物理博士和AI研究员。我的研究核心是为在线自适应放射治疗 (Online Adaptive Radiotherapy, ART) 创造更快速、更精准的计算工具。
-        </p>
-        <p>
-          我主要致力于光子段剂量预测、射束眼睛视图(BEV)与患者解剖结构之间的插值，以及开发用于实时剂量计算的毫秒级内核。我坚信开源与可复现性是推动科学进步的关键。
-        </p>
+        <p>我是一名在德国慕尼黑工作的医学物理博士和AI研究员。我的研究核心是为在线自适应放射治疗 (Online Adaptive Radiotherapy, ART) 创造更快速、更精准的计算工具。</p>
+        <p>我主要致力于光子段剂量预测、射束眼睛视图(BEV)与患者解剖结构之间的插值，以及开发用于实时剂量计算的毫秒级内核。我坚持开源与可复现性。</p>
       </section>
 
       <section id="projects" class="fade-in-section">
         <h2 class="section-title">项目 (Projects)</h2>
         <div class="project-card">
           <h3><a href="https://github.com/FansomX/conv-lstm-bev-dose" target="_blank">ConvLSTM BEV Dose Prediction</a></h3>
-          <p>一个深度学习模型，利用卷积长短期记忆网络（ConvLSTM）从射束眼睛视图（BEV）预测放射治疗中的剂量分布。</p>
-          <ul class="tech-stack">
-            <li>PyTorch</li>
-            <li>CuPy</li>
-            <li>Deep Learning</li>
-          </ul>
+          <p>利用 ConvLSTM 从 BEV 预测剂量分布。</p>
+          <ul class="tech-stack"><li>PyTorch</li><li>CuPy</li><li>Deep Learning</li></ul>
         </div>
         <div class="project-card">
           <h3><a href="https://github.com/FansomX/geant4-segment-sim" target="_blank">Geant4 Segment Simulator</a></h3>
-          <p>基于 Geant4 的蒙特卡洛模拟工具，用于精确计算放射治疗中单个光子段产生的剂量，为模型训练提供高精度数据。</p>
-          <ul class="tech-stack">
-            <li>C++</li>
-            <li>Geant4</li>
-            <li>ITK</li>
-            <li>Monte Carlo</li>
-          </ul>
+          <p>基于 Geant4 的光子段蒙特卡洛模拟与剂量累积。</p>
+          <ul class="tech-stack"><li>C++</li><li>Geant4</li><li>ITK</li><li>Monte Carlo</li></ul>
         </div>
         <div class="project-card">
           <h3><a href="https://github.com/FansomX/online-art-pipeline" target="_blank">Adaptive ART Pipeline</a></h3>
-          <p>一个高性能计算管线，整合了快速剂量计算内核，旨在实现在线自适应放疗中的实时计划调整。</p>
-          <ul class="tech-stack">
-            <li>CUDA</li>
-            <li>C++</li>
-            <li>High-Performance Computing</li>
-          </ul>
+          <p>面向在线 ART 的高性能内核与部署脚本。</p>
+          <ul class="tech-stack"><li>CUDA</li><li>C++</li><li>HPC</li></ul>
         </div>
       </section>
-      
+
       <section id="publications" class="fade-in-section">
         <h2 class="section-title">出版物 (Publications)</h2>
         <div class="publication-item">
-            <h3><a href="#" target="_blank">Unified comparative protocol for photon segment dose prediction</a></h3>
-            <p class="publication-info">Physica Medica, 2025 (under review)</p>
+          <h3><a href="#" target="_blank">Unified comparative protocol for photon segment dose prediction</a></h3>
+          <p class="publication-info">Physica Medica, 2025 (under review)</p>
         </div>
         <div class="publication-item">
-            <h3><a href="#" target="_blank">Millisecond kernels for adaptive radiotherapy</a></h3>
-            <p class="publication-info">Medical Physics, 2024</p>
+          <h3><a href="#" target="_blank">Millisecond kernels for adaptive radiotherapy</a></h3>
+          <p class="publication-info">Medical Physics, 2024</p>
         </div>
       </section>
 
@@ -343,42 +133,22 @@
   </div>
 
   <script>
-    // 动态更新年份
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // --- 特效部分 ---
-
-    // 1. 滚动淡入效果
     const sections = document.querySelectorAll('.fade-in-section');
     const navLinks = document.querySelectorAll('.nav-link');
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.2 // 当分区20%可见时触发
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // 添加动画类
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
           entry.target.classList.add('is-visible');
-
-          // 更新导航链接的激活状态
           const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            }
+          navLinks.forEach(link=>{
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
           });
         }
       });
-    }, observerOptions);
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    },{threshold:0.2});
+    sections.forEach(s=>observer.observe(s));
   </script>
 
 </body>
