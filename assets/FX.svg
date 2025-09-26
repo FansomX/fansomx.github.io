@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <!-- Safari pinned tab mask icon: solid shape only -->
+  <rect width="256" height="256" rx="56" ry="56" fill="#000"/>
+  <!-- Stylized FX monogram as simple shapes -->
+  <g fill="#fff">
+    <!-- F -->
+    <rect x="60" y="72" width="28" height="112"/>
+    <rect x="60" y="72" width="72" height="28"/>
+    <rect x="60" y="128" width="56" height="28"/>
+    <!-- X -->
+    <polygon points="156,72 180,72 200,104 220,72 244,72 212,120 244,184 220,184 200,152 180,184 156,184 188,120"/>
+  </g>
+</svg>
