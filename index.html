@@ -1,275 +1,152 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fan Xiao | PhD student · Medical Physics · AI</title>
-  <meta name="description" content="Fan Xiao — Medical Physics PhD · AI Researcher. Dose calculation, BEV↔patient interpolation, ms-level kernels for ART.">
-  <meta name="theme-color" content="#0a192f">
-  <meta property="og:title" content="Fan Xiao — Medical Physics · AI">
-  <meta property="og:description" content="Dose calc · BEV↔patient · ms-level kernels for ART.">
-  <meta property="og:type" content="website">
-  <style>
-    :root{
-      --dark:#0a192f;--navy:#0f203d;--navy2:#233554;
-      --slate:#8892b0;--slate2:#a8b2d1;--slate3:#ccd6f6;
-      --white:#e6f1ff;--acc:#64ffda;--violet:#a78bfa;
-      --photon:#4ade80;--electron:#f59e0b;--neutron:#ec4899;
-    }
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;color:var(--slate);background:var(--dark);
-      font:16px/1.75 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fan Xiao | PhD · Medical Physics · AI</title>
+<meta name="theme-color" content="#0a192f">
+<style>
+:root{--dark:#0a192f;--navy2:#233554;--slate:#8892b0;--slate2:#a8b2d1;--slate3:#ccd6f6;--white:#e6f1ff;--acc:#64ffda;--violet:#a78bfa;--photon:#4ade80}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--dark);color:var(--slate);font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;overflow-x:hidden}
 
-    /* 进度条 */
-    #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--photon),var(--acc));z-index:9999;transition:width .1s}
+/* 顶部进度条 */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--photon),var(--acc));z-index:9999}
 
-    /* 背景效果 */
-    .particle-container{position:fixed;inset:0;z-index:-5;pointer-events:none}
-    .particle{position:absolute;border-radius:50%;pointer-events:none;box-shadow:0 0 4px currentColor}
-    .particle.photon{background:var(--photon);width:2px;height:2px;animation:photon-path 12s linear infinite}
-    .particle.electron{background:var(--electron);width:3px;height:3px;animation:electron-spiral 15s ease-in-out infinite}
-    .particle.neutron{background:var(--neutron);width:2.5px;height:2.5px;animation:neutron-scatter 10s linear infinite}
-    @keyframes photon-path{0%{transform:translate(-20px,-20px);opacity:0}10%,90%{opacity:.6}100%{transform:translate(calc(100vw + 20px),calc(100vh + 20px));opacity:0}}
-    @keyframes electron-spiral{0%{transform:translate(0,100vh);opacity:0}10%{opacity:.4}50%{transform:translate(50vw,50vh) rotate(1800deg);opacity:.7}90%{opacity:.4}100%{transform:translate(100vw,0);opacity:0}}
-    @keyframes neutron-scatter{0%{transform:translate(50vw,0);opacity:0}20%,80%{opacity:.5}40%{transform:translate(20vw,30vh)}60%{transform:translate(80vw,70vh)}100%{transform:translate(50vw,100vh);opacity:0}}
+/* 背景装饰(保留) */
+.bg-grid{position:fixed;inset:0;z-index:-2;background:
+ linear-gradient(transparent 95%, rgba(255,255,255,.04) 95%),
+ linear-gradient(90deg, transparent 95%, rgba(255,255,255,.04) 95%);
+background-size:24px 24px;opacity:.4}
 
-    .dna-helix{position:fixed;right:5%;top:20%;width:2px;height:60vh;z-index:-4;pointer-events:none}
-    .dna-strand{position:absolute;width:100%;height:100%;background:linear-gradient(to bottom,transparent,var(--acc),transparent);animation:dna-rotate 20s linear infinite;transform-origin:center}
-    .dna-strand:nth-child(2){animation-delay:-10s;transform:rotateY(180deg)}
-    @keyframes dna-rotate{from{transform:rotateY(0) rotateZ(0)}to{transform:rotateY(360deg) rotateZ(360deg)}}
+/* 布局：左侧固定，右侧滚动 */
+.left{
+  position:fixed; top:0; left:0; height:100vh; width:420px;
+  padding:36px 32px; box-sizing:border-box;
+  display:flex; flex-direction:column; gap:14px; /* 紧凑 */
+  background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border-right:1px solid rgba(255,255,255,.08)
+}
+.right{
+  margin-left:420px; /* 占位 */
+  padding:48px 60px; box-sizing:border-box; max-width:1000px
+}
 
-    .dose-heatmap{position:fixed;left:0;top:0;width:100%;height:100%;z-index:-6;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(244,63,94,0.03), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(59,130,246,0.03), transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(16,185,129,0.02), transparent 50%);
-      animation:dose-pulse 8s ease-in-out infinite alternate}
-    @keyframes dose-pulse{0%{opacity:.3;transform:scale(1)}100%{opacity:.6;transform:scale(1.02)}}
+/* 左侧元素 */
+h1{color:var(--white);font-size:40px;margin:0}
+h2{margin:2px 0 0;font-size:20px;background:linear-gradient(90deg,var(--slate3),var(--acc));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid var(--navy2);margin:8px 0}
+.subtitle{margin:6px 0 0;max-width:360px}
+.dose-indicator{position:absolute;top:20px;right:20px;width:80px;height:4px;background:linear-gradient(90deg,#22c55e,#eab308,#ef4444);border-radius:2px;opacity:.6}
 
-    .bg-blobs{position:fixed;inset:-40%;z-index:-3;background:
-      radial-gradient(42vmax 42vmax at 18% 24%, rgba(100,255,218,.09), transparent),
-      radial-gradient(40vmax 40vmax at 84% 72%, rgba(167,139,250,.10), transparent),
-      radial-gradient(35vmax 35vmax at 60% 10%, rgba(74,222,128,.06), transparent);
-      animation:blob 14s ease-in-out infinite alternate}
-    .bg-grid{position:fixed;inset:0;z-index:-2;background:
-      linear-gradient(transparent 95%, rgba(255,255,255,.04) 95%),
-      linear-gradient(90deg, transparent 95%, rgba(255,255,255,.04) 95%);
-      background-size: 24px 24px;mask-image: radial-gradient(60vmax 60vmax at 50% 50%, #000 60%, transparent 100%);pointer-events:none}
-    .grain{position:fixed;inset:-50%;z-index:-1;opacity:.04;pointer-events:none;background-image:repeating-conic-gradient(from 0deg, #000 0 1deg, transparent 1deg 3deg);filter:contrast(150%) blur(.4px);animation:grain 8s steps(20) infinite}
-    @keyframes blob{to{transform:translate3d(3%,-3%,0) scale(1.02)}}
-    @keyframes grain{to{transform:translate3d(-5%,-7%,0)}}
+/* 社交按钮更靠上，不固定底部 */
+.social{list-style:none;padding:0;margin:10px 0 0;display:flex;gap:10px;flex-wrap:wrap}
+a{color:var(--acc);text-decoration:none;position:relative}
+a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:100%;background:linear-gradient(90deg,var(--acc),var(--violet));transform:scaleX(0);transform-origin:left;transition:transform .2s}
+a:hover::after{transform:scaleX(1)}
+.chip{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--slate3)}
 
-    /* 布局 */
-    .container{display:flex;max-width:1400px;margin:0 auto;position:relative}
-    .left{
-      width:40%;position:sticky;top:0; /* 固定侧栏，不滚动 */
-      display:flex;flex-direction:column;gap:24px;
-      padding:60px;box-sizing:border-box;
-      background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-      /* 不要 height:100vh 与 overflow，避免第二个滚动条 */
-    }
-    .right{width:60%;padding:60px;box-sizing:border-box}
+/* 右侧内容 */
+section{margin:80px 0}
+.title{font-size:22px;color:var(--slate3);margin:0 0 20px;display:flex;gap:10px;align-items:center}
+.title::before{content:attr(data-no) ".";color:var(--acc);font:600 16px "SF Mono","Fira Code",monospace}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:20px;margin:14px 0}
+.card h3{margin:0 0 8px;color:var(--white);font-size:18px}
+.muted{color:var(--slate2);font:14px "SF Mono","Fira Code",monospace}
 
-    /* 文字与元素 */
-    h1{color:var(--white);font-size:48px;margin:0;letter-spacing:.2px;text-shadow:0 0 20px rgba(100,255,218,.3)}
-    h2{color:var(--slate3);font-size:22px;margin:8px 0 0;
-      background:linear-gradient(90deg,var(--slate3),var(--acc));
-      background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .subtitle{max-width:460px;margin:16px 0 0;position:relative}
-    .subtitle::before{content:"";position:absolute;left:-20px;top:0;width:3px;height:100%;
-      background:linear-gradient(180deg,var(--photon),var(--acc),var(--violet));border-radius:2px;opacity:.6}
-    .avatar{width:104px;height:104px;border-radius:50%;object-fit:cover;border:2px solid var(--navy2);margin:18px 0;box-shadow:0 0 0 4px rgba(100,255,218,.1),0 6px 18px -8px rgba(0,0,0,.6);transition:all .3s}
-    .avatar:hover{transform:scale(1.05) rotate(2deg);box-shadow:0 0 0 6px rgba(100,255,218,.2),0 12px 36px -12px rgba(0,0,0,.8)}
+footer{margin:80px 0 40px;color:var(--slate2);font:12px "SF Mono","Fira Code",monospace;text-align:left}
 
-    a{color:var(--acc);text-decoration:none;position:relative}
-    a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:100%;background:linear-gradient(90deg,var(--acc),var(--violet));transform:scaleX(0);transform-origin:left;transition:transform .22s}
-    a:hover::after{transform:scaleX(1)}
+/* 返回顶部 */
+.to-top{position:fixed;right:20px;bottom:20px;opacity:0;pointer-events:none;background:rgba(255,255,255,.08);color:var(--slate3);border:1px solid rgba(255,255,255,.2);padding:10px 12px;border-radius:10px}
+.to-top.show{opacity:1;pointer-events:auto}
 
-    .social{list-style:none;padding:0;display:flex;gap:14px;flex-wrap:wrap;margin-top:auto}
-    .chip{display:inline-block;padding:10px 16px;border-radius:999px;color:var(--slate3);
-      background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 4px 12px -8px rgba(0,0,0,.4);
-      transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
-    .chip::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(100,255,218,.1),rgba(167,139,250,.1));opacity:0;transition:opacity .3s}
-    .chip:hover{transform:translateY(-4px) scale(1.02);border-color:rgba(255,255,255,.3);box-shadow:0 8px 25px -8px rgba(0,0,0,.6),0 0 0 2px rgba(100,255,218,.2);color:var(--white)}
-    .chip:hover::before{opacity:1}
-
-    main{counter-reset:sec}
-    section{margin:120px 0;opacity:0;transform:translateY(30px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
-    section.is-visible{opacity:1;transform:none}
-    .title{font-size:22px;color:var(--slate3);margin:0 0 28px;display:flex;align-items:center;gap:12px;counter-increment:sec;position:relative}
-    .title::before{content:counter(sec, decimal-leading-zero) ".";color:var(--acc);font-family:"SF Mono","Fira Code","Roboto Mono",monospace;font-weight:bold;text-shadow:0 0 8px rgba(100,255,218,.4)}
-    .title::after{content:"";position:absolute;right:0;top:50%;width:100px;height:1px;background:linear-gradient(90deg,var(--acc),transparent);transform:translateY(-50%)}
-
-    .card{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:24px;margin-bottom:16px;
-      backdrop-filter:blur(10px);transform-style:preserve-3d;box-shadow:0 8px 32px -16px rgba(2,12,27,.6),inset 0 1px 0 rgba(255,255,255,.08);position:relative;overflow:hidden;transition:all .3s}
-    .card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--acc),transparent);opacity:0;transition:opacity .3s}
-    .card:hover{transform:perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-6px);box-shadow:0 20px 60px -24px rgba(2,12,27,.8),0 0 0 1px rgba(100,255,218,.1);border-color:rgba(255,255,255,.25)}
-    .card:hover::before{opacity:1}
-    .card h3{margin:0 0 12px;font-size:18px;color:var(--white)}
-    .card h3 a{background:linear-gradient(90deg,var(--white),var(--acc));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .muted{color:var(--slate2);font-size:14px;font-family:"SF Mono","Fira Code",monospace}
-
-    .to-top{position:fixed;right:20px;bottom:20px;z-index:30;opacity:0;pointer-events:none;background:rgba(255,255,255,.08);color:var(--slate3);border:1px solid rgba(255,255,255,.2);padding:12px 16px;border-radius:12px;backdrop-filter:blur(12px);transition:all .3s cubic-bezier(.4,0,.2,1);transform:translateY(10px) scale(.9)}
-    .to-top.show{opacity:1;pointer-events:auto;transform:none}
-    .to-top:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 25px -8px rgba(0,0,0,.6);color:var(--acc)}
-
-    .dose-indicator{position:absolute;top:20px;right:20px;width:80px;height:4px;background:linear-gradient(90deg,#22c55e,#eab308,#ef4444);border-radius:2px;opacity:.6}
-    .dose-indicator::after{content:"Dose Profile";position:absolute;top:-20px;right:0;font-size:10px;color:var(--slate2);font-family:"SF Mono",monospace}
-
-    .toast{font:12px "SF Mono","Fira Code",monospace;color:var(--slate2);opacity:0;transition:opacity .2s}
-
-    footer{text-align:center;color:var(--slate2);font:12px "SF Mono","Fira Code","Roboto Mono",monospace;margin:100px 0 40px;border-top:1px solid rgba(255,255,255,.1);padding-top:40px}
-
-    @media (prefers-reduced-motion:reduce){
-      *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
-      .particle{display:none}
-    }
-    @media (max-width:1080px){
-      .container{flex-direction:column}
-      .left,.right{width:100%;position:static;height:auto;padding:40px}
-      .dna-helix{display:none}
-      h1{font-size:36px}
-    }
-  </style>
+/* 响应式：小屏改为上下布局，只有一个滚动条 */
+@media (max-width:1080px){
+  .left{position:static;width:auto;height:auto;border-right:0}
+  .right{margin-left:0;padding:32px 20px}
+}
+</style>
 </head>
 <body>
-  <div id="progress"></div>
-  <div class="particle-container" id="particles"></div>
-  <div class="dose-heatmap"></div>
-  <div class="dna-helix"><div class="dna-strand"></div><div class="dna-strand"></div></div>
-  <div class="bg-blobs"></div><div class="bg-grid"></div><div class="grain"></div>
+<div id="progress"></div>
+<div class="bg-grid"></div>
 
-  <div class="container">
-    <aside class="left">
-      <div>
-        <h1>Fan Xiao</h1>
-        <h2>Medical Physics PhD · AI Researcher</h2>
-        <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
-        <div class="dose-indicator"></div>
-        <p class="subtitle">在慕尼黑从事医学物理与计算成像研究。目标：把放疗剂量计算做得又快又稳，服务在线自适应工作流。专注于光子段剂量预测、BEV与患者空间插值，以及毫秒级计算核心的开发。</p>
-      </div>
-
-      <ul class="social">
-        <li><a class="chip" href="https://scholar.google.de/citations?hl=de&pli=1&user=jhjXYpMAAAAJ" target="_blank" aria-label="Google Scholar">Scholar</a></li>
-        <li><a class="chip" href="https://github.com/FansomX" target="_blank" aria-label="GitHub">GitHub</a></li>
-        <li><a class="chip" id="copyMail" aria-label="Email">Email</a></li>
-      </ul>
-      <p class="toast" id="toast">已复制邮箱地址 ✓</p>
-    </aside>
-
-    <main class="right">
-      <section id="projects">
-        <h3 class="title">项目 (Projects)</h3>
-        <article class="card">
-          <h3><a href="https://github.com/FansomX/conv-lstm-bev-dose" target="_blank">ConvLSTM BEV Dose Prediction</a></h3>
-          <p>从 BEV 预测三维剂量分布。基于 ConvLSTM，结合时空特征学习，实现快速准确的剂量计算。</p>
-          <p class="muted">PyTorch · CuPy · CUDA acceleration</p>
-        </article>
-        <article class="card">
-          <h3><a href="https://github.com/FansomX/geant4-segment-sim" target="_blank">Geant4 Segment Simulator</a></h3>
-          <p>光子段蒙特卡洛模拟与剂量累积分析。提供并行与加速能力。</p>
-          <p class="muted">C++ · Geant4 · ITK · OpenMP</p>
-        </article>
-        <article class="card">
-          <h3><a href="https://github.com/FansomX/online-art-pipeline" target="_blank">Adaptive ART Pipeline</a></h3>
-          <p>在线自适应放疗的高性能计算管道，毫秒级响应。</p>
-          <p class="muted">CUDA · HPC · Real-time processing</p>
-        </article>
-      </section>
-
-      <section id="publications">
-        <h3 class="title">出版物 (Publications)</h3>
-        <div class="card">
-          <h3><a href="#" target="_blank">Unified comparative protocol for photon segment dose prediction</a></h3>
-          <p>建立光子段剂量预测的统一比较协议，提供标准化评估框架。</p>
-          <p class="muted">Physica Medica, 2025 (under review)</p>
-        </div>
-        <div class="card">
-          <h3><a href="#" target="_blank">Millisecond kernels for adaptive radiotherapy</a></h3>
-          <p>面向自适应放疗的毫秒级计算核心，显著提升在线计划效率。</p>
-          <p class="muted">Medical Physics, 2024</p>
-        </div>
-      </section>
-
-      <footer>© <span id="y"></span> Fan Xiao · Munich · Advancing Medical Physics Through AI</footer>
-    </main>
+<!-- 左侧固定栏 -->
+<aside class="left">
+  <div style="position:relative">
+    <h1>Fan Xiao</h1>
+    <h2>Medical Physics PhD · AI Researcher</h2>
+    <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
+    <div class="dose-indicator"></div>
   </div>
+  <p class="subtitle">在慕尼黑从事医学物理与计算成像研究。目标：把放疗剂量计算做得又快又稳，服务在线自适应工作流。专注于光子段剂量预测、BEV↔患者空间插值，以及毫秒级计算核心。</p>
+  <ul class="social">
+    <li><a class="chip" href="https://scholar.google.de/citations?hl=de&pli=1&user=jhjXYpMAAAAJ" target="_blank">Scholar</a></li>
+    <li><a class="chip" href="https://github.com/FansomX" target="_blank">GitHub</a></li>
+    <li><a class="chip" id="copyMail">Email</a></li>
+  </ul>
+  <small id="toast" style="opacity:0;transition:opacity .2s;color:var(--slate2);margin-top:4px">已复制邮箱地址 ✓</small>
+</aside>
 
-  <a href="#top" class="to-top" id="toTop" aria-label="Back to top">↑ Top</a>
+<!-- 右侧滚动区 -->
+<main class="right">
+  <section id="projects">
+    <h3 class="title" data-no="01">项目 (Projects)</h3>
+    <article class="card">
+      <h3><a href="https://github.com/FansomX/conv-lstm-bev-dose" target="_blank">ConvLSTM BEV Dose Prediction</a></h3>
+      <p>从 BEV 预测 3D 剂量。ConvLSTM 捕获时空特征，实现快速准确。</p>
+      <p class="muted">PyTorch · CuPy · CUDA</p>
+    </article>
+    <article class="card">
+      <h3><a href="https://github.com/FansomX/geant4-segment-sim" target="_blank">Geant4 Segment Simulator</a></h3>
+      <p>光子段蒙特卡洛模拟与剂量累积。</p>
+      <p class="muted">C++ · Geant4 · ITK</p>
+    </article>
+    <article class="card">
+      <h3><a href="https://github.com/FansomX/online-art-pipeline" target="_blank">Adaptive ART Pipeline</a></h3>
+      <p>面向在线 ART 的毫秒级内核与管道。</p>
+      <p class="muted">CUDA · HPC</p>
+    </article>
+  </section>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+  <section id="publications">
+    <h3 class="title" data-no="02">出版物 (Publications)</h3>
+    <div class="card">
+      <h3><a href="#" target="_blank">Unified comparative protocol for photon segment dose prediction</a></h3>
+      <p>统一比较协议，标准化评估段剂量预测。</p>
+      <p class="muted">Physica Medica, 2025 (under review)</p>
+    </div>
+    <div class="card">
+      <h3><a href="#" target="_blank">Millisecond kernels for adaptive radiotherapy</a></h3>
+      <p>毫秒级计算核心，提升在线计划效率。</p>
+      <p class="muted">Medical Physics, 2024</p>
+    </div>
+  </section>
 
-    function initParticles(){
-      const container=document.getElementById('particles');
-      const types=['photon','electron','neutron'];
-      function spawn(t){
-        const el=document.createElement('div'); el.className=`particle ${t}`;
-        el.style.animationDelay=`-${Math.random()*8}s`;
-        if(t==='photon'){el.style.left=`${Math.random()*-50}px`;el.style.top=`${Math.random()*-50}px`;}
-        else if(t==='electron'){el.style.left=`${Math.random()*20}px`;el.style.top='100vh';}
-        else{el.style.left='50vw';el.style.top=`${Math.random()*-50}px`;}
-        container.appendChild(el);
-        setTimeout(()=>el.remove(),16000);
-      }
-      setInterval(()=>{if(Math.random()<0.7)spawn(types[Math.floor(Math.random()*types.length)])},2000);
-      for(let i=0;i<8;i++)setTimeout(()=>spawn(types[Math.floor(Math.random()*types.length)]),i*500);
-    }
-    setTimeout(initParticles,1000);
+  <footer>© <span id="y"></span> Fan Xiao · Munich · Advancing Medical Physics Through AI</footer>
+</main>
 
-    addEventListener('scroll',()=>{
-      const h=document.documentElement;
-      const p=100*h.scrollTop/(h.scrollHeight-h.clientHeight);
-      document.getElementById('progress').style.width=p+'%';
-      const btn=document.getElementById('toTop'); if(p>10)btn.classList.add('show'); else btn.classList.remove('show');
-    },{passive:true});
+<a href="#top" class="to-top" id="toTop">↑ Top</a>
 
-    const secs=[...document.querySelectorAll('section')];
-    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-visible')})},{threshold:.3});
-    secs.forEach(s=>io.observe(s));
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
 
-    function magnetic(el,strength=18){
-      let on=false,raf=null;
-      el.addEventListener('mouseenter',()=>on=true);
-      el.addEventListener('mouseleave',()=>{on=false;cancelAnimationFrame(raf);el.style.transform='';});
-      el.addEventListener('mousemove',e=>{
-        if(!on)return; const b=el.getBoundingClientRect();
-        const x=(e.clientX-(b.left+b.width/2))/(b.width/2); const y=(e.clientY-(b.top+b.height/2))/(b.height/2);
-        cancelAnimationFrame(raf); raf=requestAnimationFrame(()=>{el.style.transform=`translate(${x*strength}px,${y*strength}px)`;});
-      });
-    }
-    document.querySelectorAll('.chip').forEach(ch=>magnetic(ch,8));
-    document.querySelectorAll('.card').forEach(c=>{
-      let on=false,raf=null;
-      c.addEventListener('mouseenter',()=>on=true);
-      c.addEventListener('mouseleave',()=>{on=false;cancelAnimationFrame(raf);c.style.transform='';});
-      c.addEventListener('mousemove',e=>{
-        if(!on)return; const b=c.getBoundingClientRect();
-        const rx=((e.clientY-b.top)/b.height-.5)*-3, ry=((e.clientX-b.left)/b.width-.5)*3;
-        cancelAnimationFrame(raf); raf=requestAnimationFrame(()=>{c.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;});
-      });
-    });
+/* 进度条与返回顶部 */
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=100*h.scrollTop/(h.scrollHeight-h.clientHeight);
+  document.getElementById('progress').style.width=p+'%';
+  const btn=document.getElementById('toTop'); if(p>10)btn.classList.add('show'); else btn.classList.remove('show');
+},{passive:true});
 
-    const copyMail=document.getElementById('copyMail');
-    copyMail?.addEventListener('click',e=>{
-      e.preventDefault();
-      const mail='Fan.Xiao@med.uni-muenchen.de';
-      try{navigator.clipboard.writeText(mail);}catch{}
-      const t=document.getElementById('toast'); t.style.opacity=1; setTimeout(()=>t.style.opacity=0,2000);
-    });
-
-    const preload=['https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap'];
-    preload.forEach(href=>{const l=document.createElement('link'); l.rel='preload'; l.as='style'; l.href=href; document.head.appendChild(l);});
-
-    window.addEventListener('error',e=>console.warn('页面错误:',e.message));
-    document.addEventListener('visibilitychange',()=>{document.querySelectorAll('.particle').forEach(p=>p.style.animationPlayState=document.hidden?'paused':'running');});
-  </script>
+/* 复制邮箱 */
+document.getElementById('copyMail')?.addEventListener('click',e=>{
+  e.preventDefault();
+  const mail='Fan.Xiao@med.uni-muenchen.de';
+  try{navigator.clipboard.writeText(mail);}catch{}
+  const t=document.getElementById('toast'); t.style.opacity=1; setTimeout(()=>t.style.opacity=0,1800);
+});
+</script>
 </body>
 </html>
