@@ -248,11 +248,20 @@ for(const c of document.querySelectorAll('.chip')){
   c.addEventListener('mouseleave',()=>{c.style.setProperty('--mx','0px'); c.style.setProperty('--my','0px'); c.classList.remove('magnet');});
 }
 
-/* 轻视差：头像与标题 */
-const hero=document.getElementById('hero'); const avt=document.getElementById('avt'); const tEls=document.querySelectorAll('.title');
-addEventListener('scroll',()=>{
-  const y=scrollY*0.06; hero.style.transform=`translateY(${y}px)`; avt.style.transform=`translateY(${y*0.4}px)`;
-  tEls.forEach((t,i)=>t.style.transform=`translateY(${Math.max(0,(scrollY-200*(i+1))*.02)}px)`);
+// 轻视差：头像与标题
+const hero=document.getElementById('hero');
+const avt=document.getElementById('avt');
+const tEls=document.querySelectorAll('.title');
+
+const AVATAR_PARALLAX = 0;   // ← 0=禁用头像位移，想要极轻微可改成 0.1
+
+addEventListener('scroll', ()=>{
+  const y=scrollY*0.06;
+  hero.style.transform=`translateY(${y}px)`;
+  avt.style.transform=`translateY(${y*AVATAR_PARALLAX}px)`; // ← 不再动
+  tEls.forEach((t,i)=>{
+    t.style.transform=`translateY(${Math.max(0,(scrollY-200*(i+1))*.02)}px)`;
+  });
 },{passive:true});
 
 /* 光标脉冲圈 */
