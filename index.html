@@ -80,9 +80,9 @@ body{
 }
 
 .avatar{
-  width:85px;
-  height:100px;
-  border-radius:12px;
+  width:105px;
+  height:125px;
+  border-radius:14px;
   object-fit:cover;
   border:2px solid rgba(100,255,218,.25);
   box-shadow:0 4px 20px rgba(0,0,0,.3);
@@ -122,8 +122,68 @@ h2{
 .subtitle{
   color:var(--slate2);
   line-height:1.7;
-  margin:0 0 28px;
+  margin:0 0 24px;
   font-size:15px
+}
+
+/* 统计信息卡片 */
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:0 0 24px
+}
+.stat-card{
+  background:rgba(100,255,218,.05);
+  border:1px solid rgba(100,255,218,.15);
+  border-radius:10px;
+  padding:14px 16px;
+  transition:all .25s ease
+}
+.stat-card:hover{
+  background:rgba(100,255,218,.08);
+  border-color:rgba(100,255,218,.25);
+  transform:translateY(-2px)
+}
+.stat-number{
+  font-size:24px;
+  font-weight:700;
+  color:var(--acc);
+  line-height:1;
+  margin:0 0 4px;
+  font-family:"SF Mono","Fira Code",Consolas,monospace
+}
+.stat-label{
+  font-size:12px;
+  color:var(--slate);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  font-weight:500
+}
+
+/* 关键词标签 */
+.keywords{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0 0 24px;
+  padding:0;
+  list-style:none
+}
+.keywords li{
+  padding:5px 12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:6px;
+  font-size:12px;
+  color:var(--slate2);
+  transition:all .2s ease;
+  font-family:"SF Mono","Fira Code",Consolas,monospace
+}
+.keywords li:hover{
+  background:rgba(100,255,218,.08);
+  border-color:rgba(100,255,218,.2);
+  color:var(--acc)
 }
 
 
@@ -362,6 +422,24 @@ footer{
   </div>
   
   <p class="subtitle">PhD student at LMU Munich, researching the intersection of artificial intelligence and radiation therapy. Focusing on real-time dose calculation and adaptive treatment planning.</p>
+  
+  <!-- <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">3+</div>
+      <div class="stat-label">Years Research</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">5+</div>
+      <div class="stat-label">Publications</div>
+    </div>
+  </div>
+  
+  <ul class="keywords">
+    <li>Deep Learning</li>
+    <li>Monte Carlo</li>
+    <li>GPU Computing</li>
+    <li>Medical Imaging</li>
+  </ul> -->
   
   <ul class="social">
     <li><a class="chip" href="https://lmu-art-lab.userweb.mwn.de/author/fan-xiao/" target="_blank">Lab</a></li>
