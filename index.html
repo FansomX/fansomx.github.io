@@ -71,38 +71,50 @@ body{
 .left::-webkit-scrollbar-track{background:transparent}
 .left::-webkit-scrollbar-thumb{background:var(--navy2);border-radius:3px}
 
-/* 头部区域 */
-.header{position:relative;margin-bottom:32px}
-h1{
-  color:var(--white);
-  font-size:clamp(32px,5vw,44px);
-  font-weight:700;
-  margin:0 0 8px;
-  letter-spacing:-.5px;
-  background:linear-gradient(135deg,var(--white),var(--slate3));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent
-}
-h2{
-  margin:0 0 20px;
-  font-size:19px;
-  font-weight:400;
-  color:var(--acc);
-  letter-spacing:.3px
+/* 头部区域 - 横向布局 */
+.header{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  margin-bottom:32px
 }
 
 .avatar{
-  width:110px;height:110px;
-  border-radius:50%;
+  width:85px;
+  height:100px;
+  border-radius:12px;
   object-fit:cover;
-  border:3px solid rgba(100,255,218,.3);
-  box-shadow:0 8px 32px rgba(0,0,0,.3),0 0 0 8px rgba(100,255,218,.08);
-  margin:0 0 24px;
-  transition:transform .3s ease,box-shadow .3s ease
+  border:2px solid rgba(100,255,218,.25);
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  flex-shrink:0;
+  transition:all .3s ease
 }
 .avatar:hover{
-  transform:scale(1.05);
-  box-shadow:0 12px 40px rgba(0,0,0,.4),0 0 0 8px rgba(100,255,218,.15)
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(0,0,0,.4);
+  border-color:rgba(100,255,218,.4)
+}
+
+.header-text{
+  flex:1;
+  min-width:0
+}
+
+h1{
+  color:var(--white);
+  font-size:clamp(28px,4vw,36px);
+  font-weight:700;
+  margin:0 0 6px;
+  letter-spacing:-.3px;
+  line-height:1.2
+}
+h2{
+  margin:0;
+  font-size:16px;
+  font-weight:400;
+  color:var(--acc);
+  letter-spacing:.2px;
+  line-height:1.4
 }
 
 
@@ -114,29 +126,7 @@ h2{
   font-size:15px
 }
 
-/* 研究兴趣标签 */
-.interests{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:0 0 28px;
-  padding:0;
-  list-style:none
-}
-.interests li{
-  padding:6px 14px;
-  background:rgba(100,255,218,.08);
-  border:1px solid rgba(100,255,218,.2);
-  border-radius:6px;
-  font-size:13px;
-  color:var(--slate3);
-  transition:all .2s ease
-}
-.interests li:hover{
-  background:rgba(100,255,218,.15);
-  border-color:rgba(100,255,218,.4);
-  transform:translateY(-2px)
-}
+
 
 /* 社交链接 */
 .social{
@@ -355,7 +345,6 @@ footer{
     margin-left:0;
     padding:40px 24px
   }
-  .dose-indicator{top:auto;bottom:24px}
 }
 </style>
 </head>
@@ -365,12 +354,12 @@ footer{
 
 <aside class="left">
   <div class="header">
-    <h1>Fan Xiao</h1>
-    <h2>PhD Student in Medical Physics</h2>
-    <div class="dose-indicator"></div>
+    <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
+    <div class="header-text">
+      <h1>Fan Xiao</h1>
+      <h2>PhD Student in Medical Physics</h2>
+    </div>
   </div>
-  
-  <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
   
   <p class="subtitle">PhD student at LMU Munich, researching the intersection of artificial intelligence and radiation therapy. Focusing on real-time dose calculation and adaptive treatment planning.</p>
   
