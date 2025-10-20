@@ -17,6 +17,15 @@
   --accent:#64ffda;
   --border:#1e293b;
 }
+
+[data-theme="light"]{
+  --bg:#ffffff;
+  --surface:#f8f9fa;
+  --text:#64748b;
+  --text-bright:#0f172a;
+  --accent:#0891b2;
+  --border:#e2e8f0;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -28,6 +37,76 @@ body{
 }
 a{color:var(--accent);text-decoration:none;transition:.2s}
 a:hover{opacity:.8}
+
+/* 主题切换按钮 */
+.theme-toggle{
+  position:fixed;
+  top:32px;
+  right:32px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text-bright);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+  z-index:100;
+}
+
+.theme-toggle:hover{
+  border-color:var(--accent);
+  transform:rotate(180deg);
+}
+
+.theme-icon{
+  width:20px;
+  height:20px;
+  position:relative;
+  transition:.3s;
+}
+
+/* 太阳图标 */
+.sun{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:currentColor;
+  box-shadow:0 0 0 2px currentColor;
+  position:absolute;
+  top:3px;
+  left:3px;
+}
+
+.sun::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:20px;
+  height:20px;
+  transform:translate(-50%,-50%);
+  background:
+    linear-gradient(currentColor,currentColor) 0 50%/2px 4px,
+    linear-gradient(currentColor,currentColor) 50% 0/4px 2px,
+    linear-gradient(45deg,currentColor,currentColor) 0 0/2px 4px,
+    linear-gradient(-45deg,currentColor,currentColor) 100% 0/2px 4px;
+  background-repeat:no-repeat;
+}
+
+/* 月亮图标 */
+.moon{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  box-shadow:-4px 0 0 0 currentColor;
+  position:absolute;
+  top:2px;
+  left:6px;
+}
 
 /* 左侧固定栏 */
 .sidebar{
@@ -52,8 +131,8 @@ a:hover{opacity:.8}
 }
 
 .avatar{
-  width:120px;
-  height:120px;
+  width:100px;
+  height:100px;
   border-radius:12px;
   object-fit:cover;
   border:1px solid var(--border);
@@ -220,6 +299,10 @@ footer{
   .links{
     grid-template-columns:1fr 1fr;
   }
+  .theme-toggle{
+    top:20px;
+    right:20px;
+  }
 }
 
 @media (max-width:640px){
@@ -232,13 +315,20 @@ footer{
 </head>
 <body>
 
+<!-- 主题切换按钮 -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <div class="theme-icon" id="themeIcon">
+    <div class="sun"></div>
+  </div>
+</button>
+
 <!-- 左侧固定栏 -->
 <aside class="sidebar">
   <div class="header-row">
-    <img src="assets/Fan.PNG" alt="Fan Xiao" class="avatar">
+    <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
     <h1>Fan Xiao</h1>
   </div>
-  <p class="subtitle">PhD student in Medical Physics at LMU Munich. My research focuses on AI-accelerated dose calculation methods for MR-guided photon and proton therapy.</p>
+  <p class="subtitle">I develop AI-accelerated dose calculation methods for both photon and proton therapy.</p>
   <div class="links">
     <a href="mailto:Fan.Xiao@med.uni-muenchen.de">Email</a>
     <a href="https://scholar.google.de/citations?user=jhjXYpMAAAAJ" target="_blank">Scholar</a>
@@ -266,7 +356,7 @@ footer{
 
       <li class="pub">
         <div class="pub-title">Proton Dose Calculation with LSTM Networks in Presence of a Magnetic Field</div>
-        <div class="pub-meta">Domagoj Radonic, Fan Xiao, et al.</div>
+        <div class="pub-meta">Fan Xiao, et al.</div>
         <div><span class="pub-venue">Phys. Med. Biol. 2024</span></div>
       </li>
 
@@ -297,28 +387,48 @@ footer{
   </section>
 
   <section id="talks">
-    <h2>Talks</h2>
+    <h2>Selected Talks</h2>
     <ul class="simple-list">
-      <li><span>2025</span> AAPM — Washington, DC</li>
-      <li><span>2024</span> ECMP — Munich</li>
-      <li><span>2024</span> ICCR — Lyon</li>
+      <li><span>2025</span> AAPM (Oral) — Washington, DC</li>
+      <li><span>2024</span> ICCR (Oral) — Sydney</li>
+      <li><span>2024</span> ECMP (Oral) — Munich</li>
     </ul>
   </section>
 
   <section id="service">
     <h2>Service</h2>
     <ul class="simple-list">
-      <li><span>Reviewer</span> Medical Physics, Physics in Medicine & Biology, PhiRO</li>
+      <li><span>Reviewer</span> Medical Physics, Physics in Medicine & Biology, Physica Medica</li>
       <li><span>Award</span> Chinese National Scholarship (2022)</li>
     </ul>
   </section>
 
   <footer>
-    © <span id="year"></span> Fan Xiao | Munich
+    © <span id="year"></span> Fan Xiao
   </footer>
 </main>
 
 <script>
+// 主题切换
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const html = document.documentElement;
+
+// 检查本地存储的主题
+const savedTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+themeIcon.innerHTML = savedTheme === 'light' ? '<div class="moon"></div>' : '<div class="sun"></div>';
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeIcon.innerHTML = newTheme === 'light' ? '<div class="moon"></div>' : '<div class="sun"></div>';
+});
+
+// 年份
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
