@@ -83,6 +83,24 @@ h2{margin:0;font-size:16px;font-weight:500;color:var(--acc);letter-spacing:.12em
 .keywords{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px;padding:0;list-style:none}
 .keywords li{padding:6px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;font-size:12px;color:var(--slate2);letter-spacing:.08em;text-transform:uppercase;transition:.2s;font-family:"JetBrains Mono",Consolas,monospace}
 .keywords li:hover{background:rgba(100,255,218,.12);border-color:rgba(100,255,218,.35);color:var(--acc)}
+.news-list{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+.news-item{display:flex;gap:18px;padding:18px 22px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(20,34,56,.55);box-shadow:0 18px 40px rgba(5,10,20,.32)}
+.news-item time{font:600 13px "JetBrains Mono",Consolas,monospace;color:var(--acc);letter-spacing:.08em;min-width:95px;line-height:1.4}
+.news-item strong{color:var(--slate3);font-weight:600}
+.news-item p{margin:4px 0 0;color:var(--slate2);font-size:14px}
+.pub-list{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:18px}
+.pub{padding:22px 24px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(20,34,56,.58);box-shadow:0 20px 44px rgba(5,10,20,.34)}
+.pub-header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:600 12px "JetBrains Mono",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.pub-year{color:var(--acc);font-size:13px}
+.pub h4{margin:0;color:var(--white);font-size:18px;line-height:1.45}
+.pub-authors{margin:6px 0 0;color:var(--slate2)}
+.pub-note{margin:6px 0 0;color:var(--slate2);font-size:14px}
+.pub-links{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+.link-pill{display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;border:1px solid rgba(100,255,218,.28);color:var(--acc);font:600 11px "JetBrains Mono",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;background:rgba(100,255,218,.08);transition:.3s;text-decoration:none;cursor:default}
+.link-pill[href]{cursor:pointer}
+.link-pill:hover{border-color:var(--acc);color:var(--white);background:rgba(100,255,218,.18);transform:translateY(-2px);box-shadow:0 12px 24px rgba(6,12,24,.4)}
+.plain-list{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;color:var(--slate2)}
+.plain-list span{color:var(--slate3);font-weight:600}
 .divider{width:100%;height:1px;background:linear-gradient(90deg,rgba(100,255,218,.18),transparent);margin:10px 0 6px;border:0}
 .nav{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 6px}
 .nav a{font:600 12px "JetBrains Mono",Consolas,monospace;color:var(--slate2);padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);transition:.2s}
@@ -177,12 +195,12 @@ footer{margin:100px 0 40px;padding-top:28px;border-top:1px solid rgba(255,255,25
       <hr class="divider" aria-hidden="true">
 
       <nav class="nav" aria-label="Section navigation">
-        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#news">News</a>
         <a href="#publications">Publications</a>
         <a href="#talks">Talks</a>
-        <a href="#awards">Awards</a>
-        <a href="#service">Service</a>
-        <a href="#timeline">Timeline</a>
+        <a href="#community">Community</a>
       </nav>
 
       <ul class="keywords">
@@ -206,178 +224,188 @@ footer{margin:100px 0 40px;padding-top:28px;border-top:1px solid rgba(255,255,25
 </aside>
 
 <main class="right">
-  <div class="hero-intro">
-    <h3 class="title" data-no="00">Portfolio</h3>
-    <p>Medical physicist building GPU-native dose engines and adaptive radiotherapy workflows. Focus on differentiable Monte Carlo, real-time plan optimisation, and QA automation ready for clinic use.</p>
-  </div>
+  <section id="about" class="hero-intro">
+    <h3 class="title" data-no="00">About</h3>
+    <p>PhD candidate in medical physics at LMU Munich building GPU-native dose engines for photon and proton therapy. Research blends differentiable Monte Carlo, real-time adaptive planning, and QA automation with clinical partners.</p>
+  </section>
 
-  <section id="projects">
-    <h3 class="title" data-no="01">Selected Projects</h3>
+  <section id="focus">
+    <h3 class="title" data-no="01">Research Focus</h3>
     <div class="cards-grid">
       <article class="card">
-        <h3><a href="https://github.com/FansomX/conv-lstm-bev-dose" target="_blank" rel="noopener">ConvLSTM BEV Dose Prediction</a></h3>
-        <p>3D dose reconstruction from beam's-eye-view projections with ConvLSTM ensembles, delivering millimetre accuracy for MR-LINAC QA in near real time.</p>
+        <h3>Differentiable Dose Engines</h3>
+        <p>Monte Carlo surrogates and differentiable transport models tuned for MR-guided photon therapy, delivering QA-grade accuracy on GPUs.</p>
         <div class="meta">
-          <span class="badge">PyTorch</span><span class="badge">CuPy</span><span class="badge">CUDA</span>
-          <span class="badge">10 ms/beamlet</span>
+          <span class="badge">Differentiable MC</span><span class="badge">PyTorch</span><span class="badge">CuPy</span>
         </div>
       </article>
 
       <article class="card">
-        <h3><a href="https://github.com/FansomX/geant4-segment-sim" target="_blank" rel="noopener">Geant4 Segment Simulator</a></h3>
-        <p>Segment-based photon Monte Carlo with inline dose accumulation, uncertainty tracking, and RT-plan import for independent verification.</p>
+        <h3>Adaptive Radiotherapy Systems</h3>
+        <p>GPU-first optimisation kernels that close the loop between deformable registration, plan adaptation, and online replanning in minutes.</p>
         <div class="meta">
-          <span class="badge">C++</span><span class="badge">Geant4</span><span class="badge">ITK</span>
+          <span class="badge">Adaptive RT</span><span class="badge">CUDA</span><span class="badge">Realtime</span>
         </div>
       </article>
 
       <article class="card">
-        <h3><a href="https://github.com/FansomX/online-art-pipeline" target="_blank" rel="noopener">Online Adaptive RT Pipeline</a></h3>
-        <p>GPU-first kernels for online adaptive radiotherapy, coupling deformable registration with differentiable dose optimisation.</p>
+        <h3>Proton Range Assurance</h3>
+        <p>LSTM-driven prompt-gamma and dose prediction pipelines for magnet-integrated proton therapy with uncertainty quantification.</p>
         <div class="meta">
-          <span class="badge">CUDA</span><span class="badge">HPC</span><span class="badge">Realtime</span>
+          <span class="badge">Proton Therapy</span><span class="badge">LSTM</span><span class="badge">Uncertainty</span>
         </div>
       </article>
     </div>
+  </section>
+
+  <section id="news">
+    <h3 class="title" data-no="02">Recent News</h3>
+    <ul class="news-list">
+      <li class="news-item">
+        <time>2025 · Oct</time>
+        <div>
+          <strong>Medical Physics paper accepted.</strong>
+          <p>Synthetic-CT-free photon dose workflow moving into validation with LMU clinical partners.</p>
+        </div>
+      </li>
+      <li class="news-item">
+        <time>2024 · Dec</time>
+        <div>
+          <strong>Prompt gamma LSTM published in PMB.</strong>
+          <p>Released proton range prediction pipeline with uncertainty tracking for treatment monitoring.</p>
+        </div>
+      </li>
+      <li class="news-item">
+        <time>2024 · Oct</time>
+        <div>
+          <strong>Magnetic-field proton dose study accepted.</strong>
+          <p>Extended LSTM-based dose modelling to 1.5 T MR-guided proton therapy scenarios.</p>
+        </div>
+      </li>
+      <li class="news-item">
+        <time>2023 · Sep</time>
+        <div>
+          <strong>Started PhD at LMU Munich.</strong>
+          <p>Joined the ART Lab to advance AI-native dose engines for photon and proton modalities.</p>
+        </div>
+      </li>
+      <li class="news-item">
+        <time>2022 · Sep</time>
+        <div>
+          <strong>Received the Chinese National Scholarship.</strong>
+          <p>Recognised nationally for academic excellence and radiotherapy research.</p>
+        </div>
+      </li>
+      <li class="news-item">
+        <time>2022 · Jun</time>
+        <div>
+          <strong>TransDose appeared in PMB.</strong>
+          <p>Presented transformer-boosted U-Net for MR-LINAC dose computation.</p>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <section id="publications">
-    <h3 class="title" data-no="02">Publications</h3>
-    <div class="cards-grid">
-      <!-- 一作 x3 -->
-      <div class="card">
-        <h3>Deep Learning-Based Synthetic-CT-Free Photon Dose Calculation in MR-Guided Radiotherapy</h3>
-        <p><strong>Medical Physics</strong>, accepted 2025. Synthetic-CT-free photon dose on 0.35 T MRI validated on clinical workflows.</p>
-        <p class="muted">First author · Code sharing soon.</p>
-      </div>
+    <h3 class="title" data-no="03">Selected Publications</h3>
+    <ol class="pub-list">
+      <li class="pub">
+        <div class="pub-header">
+          <span class="pub-year">2025</span>
+          <span class="badge">Medical Physics</span>
+          <span class="badge">First Author</span>
+        </div>
+        <h4>Deep Learning-Based Synthetic-CT-Free Photon Dose Calculation in MR-Guided Radiotherapy</h4>
+        <p class="pub-authors"><strong>Fan Xiao*</strong> with LMU ART Lab collaborators.</p>
+        <p class="pub-note">Synthetic-CT-free photon dose on 0.35&nbsp;T MRI validated end-to-end on clinical workflows.</p>
+        <div class="pub-links">
+          <span class="link-pill">Accepted</span>
+          <span class="link-pill">Code soon</span>
+        </div>
+      </li>
 
-      <div class="card">
-        <h3>Prompt gamma emission prediction using an LSTM network</h3>
-        <p><strong>Physics in Medicine &amp; Biology</strong> 69(23):235003, 2024. Predictive modelling for proton range verification.</p>
-        <p class="muted">First author.</p>
-      </div>
+      <li class="pub">
+        <div class="pub-header">
+          <span class="pub-year">2024</span>
+          <span class="badge">Phys. Med. &amp; Biol.</span>
+          <span class="badge">First Author</span>
+        </div>
+        <h4>Prompt Gamma Emission Prediction Using an LSTM Network</h4>
+        <p class="pub-authors"><strong>Fan Xiao*</strong>, LMU ART Lab.</p>
+        <p class="pub-note">Predictive modelling for proton range verification with calibrated uncertainty estimation.</p>
+        <div class="pub-links">
+          <span class="link-pill">Published</span>
+        </div>
+      </li>
 
-      <div class="card">
-        <h3>TransDose: a transformer-based UNet for fast and accurate dose calculation for MR-LINACs</h3>
-        <p><strong>Physics in Medicine &amp; Biology</strong> 67(12):125013, 2022. Transformer-enhanced U-Net surpassing clinical accuracy benchmarks.</p>
-        <p class="muted">First author.</p>
-      </div>
+      <li class="pub">
+        <div class="pub-header">
+          <span class="pub-year">2024</span>
+          <span class="badge">Phys. Med. &amp; Biol.</span>
+          <span class="badge">Co-First Author</span>
+        </div>
+        <h4>Proton Dose Calculation with LSTM Networks in Presence of a Magnetic Field</h4>
+        <p class="pub-authors">Fan Xiao, LMU ART Lab collaborators.</p>
+        <p class="pub-note">Extended LSTM-based proton dose prediction to 1.5&nbsp;T MR-guided delivery scenarios.</p>
+        <div class="pub-links">
+          <span class="link-pill">Published</span>
+        </div>
+      </li>
 
-      <!-- 可选展示：共同一作 -->
-      <div class="card">
-        <h3>Proton dose calculation with LSTM networks in presence of a magnetic field</h3>
-        <p><strong>Physics in Medicine &amp; Biology</strong> 69(21):215019, 2024. Extending LSTM-based dose prediction to 1.5 T MR-guided scenarios.</p>
-        <p class="muted">Co-first author.</p>
-      </div>
-    </div>
+      <li class="pub">
+        <div class="pub-header">
+          <span class="pub-year">2022</span>
+          <span class="badge">Phys. Med. &amp; Biol.</span>
+          <span class="badge">First Author</span>
+        </div>
+        <h4>TransDose: A Transformer-Based UNet for Fast and Accurate Dose Calculation for MR-LINACs</h4>
+        <p class="pub-authors"><strong>Fan Xiao*</strong>, Southern Medical University.</p>
+        <p class="pub-note">Transformer-enhanced U-Net surpassing MR-LINAC clinical accuracy benchmarks while preserving speed.</p>
+        <div class="pub-links">
+          <span class="link-pill">Published</span>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <section id="talks">
-    <h3 class="title" data-no="03">Talks</h3>
+    <h3 class="title" data-no="04">Talks &amp; Outreach</h3>
     <div class="cards-grid">
       <div class="card">
         <h3>AAPM 2025 · Oral</h3>
-        <p>Benchmarked AI dose pipelines across photon and proton modalities.</p>
+        <p>Benchmarked AI-native dose pipelines across photon and proton modalities with clinical datasets.</p>
         <p class="muted">Washington, DC.</p>
       </div>
 
       <div class="card">
         <h3>ICCR 2024 · Oral</h3>
-        <p>Showcased proton LSTM dose modelling and prompt gamma range assurance workflow.</p>
+        <p>Showcased LSTM-based proton dose modelling and prompt gamma range assurance insights.</p>
         <p class="muted">Sydney.</p>
       </div>
 
       <div class="card">
         <h3>ECMP 2024 · Oral</h3>
-        <p>Shared MR-guided dose computation insights and real-time adaptive kernels in clinic.</p>
+        <p>Shared MR-guided dose computation advances and real-time adaptive kernels used in clinic.</p>
         <p class="muted">Munich.</p>
       </div>
     </div>
   </section>
 
-  <section id="awards">
-    <h3 class="title" data-no="04">Awards</h3>
+  <section id="community">
+    <h3 class="title" data-no="05">Community &amp; Recognition</h3>
     <div class="cards-grid">
       <div class="card">
-        <h3>Chinese National Scholarship</h3>
-        <p>2022 · National recognition for academic excellence.</p>
-        <p class="muted">Southern Medical University.</p>
+        <h3>Awards</h3>
+        <ul class="plain-list">
+          <li><span>2022</span> Chinese National Scholarship · Southern Medical University.</li>
+          <li><span>2021 &amp; 2022</span> First-class Academic Scholarship · Southern Medical University.</li>
+        </ul>
       </div>
-
       <div class="card">
-        <h3>First-class Academic Scholarship ×2</h3>
-        <p>2021 &amp; 2022 · Honoured for top GPA and radiotherapy research.</p>
-        <p class="muted">Southern Medical University.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="service">
-    <h3 class="title" data-no="05">Service</h3>
-    <div class="cards-grid">
-      <div class="card">
-        <h3>Reviewer</h3>
-        <p>Medical Physics · Physics in Medicine &amp; Biology · Physica Medica (PhiRO). Focus on AI-enabled dose engines and MR-guided RT.</p>
-        <p class="muted">Since 2024.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="timeline">
-    <h3 class="title" data-no="06">Timeline</h3>
-    <div class="card tl">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">2025 · 10</div>
-        <div class="tl-body">
-          <h4>Medical Physics paper accepted</h4>
-          <p class="muted">Synthetic-CT-free photon dose · First author.</p>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">2024 · 12</div>
-        <div class="tl-body">
-          <h4>PMB: Prompt gamma LSTM</h4>
-          <p class="muted">First author.</p>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">2024 · 10</div>
-        <div class="tl-body">
-          <h4>PMB: Proton dose w/ LSTM in 1.5 T</h4>
-          <p class="muted">Co-first author.</p>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">2023 · 09</div>
-        <div class="tl-body">
-          <h4>Started PhD · LMU</h4>
-          <p class="muted">Medical Physics · AI dose calculation.</p>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">2022 · 06</div>
-        <div class="tl-body">
-          <h4>PMB: TransDose</h4>
-          <p class="muted">First author.</p>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">2022 · 09</div>
-        <div class="tl-body">
-          <h4>Chinese National Scholarship</h4>
-          <p class="muted">Awarded.</p>
-        </div>
+        <h3>Service</h3>
+        <ul class="plain-list">
+          <li><span>Reviewer</span> Medical Physics · Physics in Medicine &amp; Biology · Physica Medica (PhiRO) · since 2024.</li>
+        </ul>
       </div>
     </div>
   </section>
