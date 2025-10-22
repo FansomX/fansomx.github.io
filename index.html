@@ -154,21 +154,43 @@ h1{
   margin-bottom:28px;
 }
 
+.research-list{
+  list-style:none;
+  margin:16px 0 20px 0;
+  font-size:15px;
+  line-height:1.8;
+  color:var(--text);
+}
+
+.research-list li{
+  padding-left:20px;
+  position:relative;
+  margin-bottom:6px;
+}
+
+.research-list li::before{
+  content:'•';
+  color:var(--accent);
+  position:absolute;
+  left:0;
+  font-weight:bold;
+}
+
 .links{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+  display:flex;
   gap:10px;
   font-size:13px;
 }
 
 .links a{
   color:var(--text);
-  padding:10px 16px;
+  padding:10px 20px;
   border:1px solid var(--border);
   border-radius:6px;
   font-family:"JetBrains Mono",monospace;
   text-align:center;
   transition:.2s;
+  flex:1;
 }
 
 .links a:hover{
@@ -297,7 +319,8 @@ footer{
   }
   h1{font-size:32px}
   .links{
-    grid-template-columns:1fr 1fr;
+    display:flex;
+    flex-wrap:wrap;
   }
   .theme-toggle{
     top:20px;
@@ -328,12 +351,17 @@ footer{
     <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
     <h1>Fan Xiao</h1>
   </div>
-  <p class="subtitle">I develop AI-accelerated dose calculation methods for both photon and proton therapy.</p>
+  <p class="subtitle">Hi! I'm Fan Xiao (肖帆). I'm currently a PhD candidate at <a href="https://lmu-art-lab.userweb.mwn.de" target="_blank">LMU Adaptive Radiation Therapy Lab</a>. My research interests are in the intersection between Deep Learning and Medical Imaging Processing. More specifically:</p>
+  <ul class="research-list">
+    <li>AI-accelerated dose calculation for photon and proton therapy</li>
+    <li>AI-accelerated prompt gamma prediction</li>
+    <li>AI-based air cavity segmentation</li>
+  </ul>
+  <p class="subtitle">Prior to the PhD, I finished my Master's Degree in Biomedical Engineering at Southern Medical University.</p>
   <div class="links">
     <a href="mailto:Fan.Xiao@med.uni-muenchen.de">Email</a>
     <a href="https://scholar.google.de/citations?user=jhjXYpMAAAAJ" target="_blank">Scholar</a>
     <a href="https://github.com/FansomX" target="_blank">GitHub</a>
-    <a href="https://lmu-art-lab.userweb.mwn.de" target="_blank">Lab</a>
   </div>
 </aside>
 
