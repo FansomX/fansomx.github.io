@@ -3,8 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fan Xiao</title>
+<title>Fan Xiao - PhD Candidate in Medical Physics</title>
+<meta name="description" content="Fan Xiao - PhD candidate at LMU Munich, researching AI-accelerated radiation therapy, deep learning for medical imaging, and Monte Carlo simulation.">
 <meta name="theme-color" content="#0a192f">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fan Xiao - PhD Candidate in Medical Physics">
+<meta property="og:description" content="Research in AI-accelerated radiation therapy and medical imaging">
+<meta property="og:url" content="https://yourwebsite.com">
+
 <link rel="icon" type="image/svg+xml" href="assets/FX.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +47,6 @@ body{
 a{color:var(--accent);text-decoration:none;transition:.2s}
 a:hover{opacity:.8}
 
-/* 主题切换按钮 */
 .theme-toggle{
   position:fixed;
   top:32px;
@@ -70,7 +77,6 @@ a:hover{opacity:.8}
   transition:.3s;
 }
 
-/* 太阳图标 */
 .sun{
   width:8px;
   height:8px;
@@ -98,7 +104,6 @@ a:hover{opacity:.8}
   background-repeat:no-repeat;
 }
 
-/* 月亮图标 */
 .moon{
   width:11px;
   height:11px;
@@ -109,7 +114,6 @@ a:hover{opacity:.8}
   left:3.5px;
 }
 
-/* 左侧固定栏 */
 .sidebar{
   position:fixed;
   left:0;
@@ -201,7 +205,6 @@ h1{
   background:rgba(100,255,218,.05);
 }
 
-/* 右侧内容区 */
 .content{
   margin-left:440px;
   padding:60px 80px 60px;
@@ -234,15 +237,40 @@ h2{
   line-height:1.5;
 }
 
+.pub-title a{
+  color:var(--text-bright);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.pub-title a:hover{
+  color:var(--accent);
+}
+
+.pub-title a::after{
+  content:'↗';
+  font-size:14px;
+  opacity:.5;
+}
+
 .pub-meta{
   font-size:14px;
   color:var(--text);
-  margin-bottom:8px;
+  margin-bottom:10px;
+  line-height:1.6;
 }
 
 .pub-meta strong{
   color:var(--accent);
   font-weight:500;
+}
+
+.pub-desc{
+  font-size:14px;
+  color:var(--text);
+  line-height:1.6;
+  margin-top:8px;
 }
 
 .pub-venue{
@@ -254,6 +282,28 @@ h2{
   font:500 12px "JetBrains Mono",monospace;
   color:var(--accent);
   margin-right:8px;
+}
+
+.pub-links{
+  margin-top:10px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.pub-link{
+  padding:4px 12px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-size:12px;
+  font-family:"JetBrains Mono",monospace;
+  color:var(--text);
+  transition:.2s;
+}
+
+.pub-link:hover{
+  border-color:var(--accent);
+  color:var(--accent);
 }
 
 .news-list{list-style:none}
@@ -297,7 +347,6 @@ footer{
   opacity:.7;
 }
 
-/* 响应式 */
 @media (max-width:1024px){
   .sidebar{
     position:static;
@@ -340,26 +389,24 @@ footer{
 </head>
 <body>
 
-<!-- 主题切换按钮 -->
 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
   <div class="theme-icon" id="themeIcon">
     <div class="sun"></div>
   </div>
 </button>
 
-<!-- 左侧固定栏 -->
 <aside class="sidebar">
   <div class="header-row">
     <img src="assets/Fan.jpeg" alt="Fan Xiao" class="avatar">
     <h1>Fan Xiao</h1>
   </div>
-  <p class="subtitle">Hi! I'm Fan Xiao (肖帆). I'm currently a PhD candidate at <a href="https://lmu-art-lab.userweb.mwn.de" target="_blank">LMU Adaptive Radiation Therapy Lab</a> in Munich. My research interests are in the intersection between Deep Learning, Medical Imaging Processing and Monte Carlo Simulation. More specifically:</p>
+  <p class="subtitle">Hi! I'm Fan Xiao (肖帆). I'm currently a PhD candidate at <a href="https://lmu-art-lab.userweb.mwn.de" target="_blank">LMU Adaptive Radiation Therapy Lab</a> in Munich. My research focuses on deep learning for medical physics, specifically:</p>
   <ul class="research-list">
     <li>AI-accelerated dose calculation for photon and proton therapy</li>
     <li>AI-accelerated prompt gamma emission prediction</li>
     <li>AI-based air cavity segmentation on MRI</li>
   </ul>
-  <p class="subtitle">Prior to the PhD, I finished my Master's Degree in Biomedical Engineering at Southern Medical University in GuangZhou.</p>
+  <p class="subtitle">Prior to my PhD, I completed my Master's degree in Biomedical Engineering at Southern Medical University in Guangzhou.</p>
   <div class="links">
     <a href="mailto:Fan.Xiao@med.uni-muenchen.de">Email</a>
     <a href="https://scholar.google.de/citations?user=jhjXYpMAAAAJ" target="_blank">Scholar</a>
@@ -367,33 +414,57 @@ footer{
   </div>
 </aside>
 
-<!-- 右侧内容区 -->
 <main class="content">
   <section id="publications">
     <h2>Publications</h2>
     <ol class="pub-list">
       <li class="pub">
-        <div class="pub-title">Deep Learning-Based Synthetic-CT-Free Photon Dose Calculation in MR-Guided Radiotherapy</div>
+        <div class="pub-title">
+          <a href="#" target="_blank">Deep Learning-Based Synthetic-CT-Free Photon Dose Calculation in MR-Guided Radiotherapy</a>
+        </div>
         <div class="pub-meta"><strong>Fan Xiao</strong>, et al.</div>
         <div><span class="pub-venue">Medical Physics 2025</span></div>
+        <div class="pub-desc">A novel deep learning approach for direct dose calculation from MRI without requiring synthetic CT generation, improving efficiency in MR-guided radiotherapy workflows.</div>
+        <div class="pub-links">
+          <a href="#" class="pub-link" target="_blank">DOI</a>
+          <a href="#" class="pub-link" target="_blank">PDF</a>
+        </div>
       </li>
 
       <li class="pub">
-        <div class="pub-title">Prompt Gamma Emission Prediction Using an LSTM Network</div>
+        <div class="pub-title">
+          <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad88b3" target="_blank">Prompt Gamma Emission Prediction Using an LSTM Network</a>
+        </div>
         <div class="pub-meta"><strong>Fan Xiao</strong>, et al.</div>
         <div><span class="pub-venue">Phys. Med. Biol. 2024</span></div>
+        <div class="pub-desc">LSTM-based method for real-time prompt gamma prediction in proton therapy, enabling faster quality assurance without extensive Monte Carlo simulations.</div>
+        <div class="pub-links">
+          <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad88b3" class="pub-link" target="_blank">DOI</a>
+        </div>
       </li>
 
       <li class="pub">
-        <div class="pub-title">Proton Dose Calculation with LSTM Networks in Presence of a Magnetic Field</div>
+        <div class="pub-title">
+          <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad88b2" target="_blank">Proton Dose Calculation with LSTM Networks in Presence of a Magnetic Field</a>
+        </div>
         <div class="pub-meta">Domagoj Radonic, <strong>Fan Xiao</strong>, et al.</div>
         <div><span class="pub-venue">Phys. Med. Biol. 2024</span></div>
+        <div class="pub-desc">Novel neural network approach for accurate proton dose calculation in magnetic resonance-guided proton therapy systems.</div>
+        <div class="pub-links">
+          <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad88b2" class="pub-link" target="_blank">DOI</a>
+        </div>
       </li>
 
       <li class="pub">
-        <div class="pub-title">TransDose: A Transformer-Based UNet for Fast and Accurate Dose Calculation for MR-LINACs</div>
+        <div class="pub-title">
+          <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ac9d1f" target="_blank">TransDose: A Transformer-Based UNet for Fast and Accurate Dose Calculation for MR-LINACs</a>
+        </div>
         <div class="pub-meta"><strong>Fan Xiao</strong>, et al.</div>
         <div><span class="pub-venue">Phys. Med. Biol. 2022</span></div>
+        <div class="pub-desc">Transformer-based architecture achieving significant speedup in dose calculation for MR-LINAC systems while maintaining clinical accuracy.</div>
+        <div class="pub-links">
+          <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ac9d1f" class="pub-link" target="_blank">DOI</a>
+        </div>
       </li>
     </ol>
   </section>
@@ -403,15 +474,19 @@ footer{
     <ul class="news-list">
       <li class="news-item">
         <span class="news-date">Oct 2025</span>
-        <span>Paper accepted in Medical Physics</span>
+        <span>Paper on synthetic-CT-free dose calculation accepted in Medical Physics</span>
       </li>
       <li class="news-item">
         <span class="news-date">Dec 2024</span>
-        <span>Published prompt gamma prediction in PMB</span>
+        <span>Published prompt gamma prediction paper in Physics in Medicine & Biology</span>
       </li>
       <li class="news-item">
         <span class="news-date">Sep 2023</span>
-        <span>Started PhD at LMU Munich</span>
+        <span>Started PhD position at LMU Munich Adaptive Radiation Therapy Lab</span>
+      </li>
+      <li class="news-item">
+        <span class="news-date">Nov 2022</span>
+        <span>TransDose paper published in Physics in Medicine & Biology</span>
       </li>
     </ul>
   </section>
@@ -419,14 +494,14 @@ footer{
   <section id="talks">
     <h2>Selected Talks</h2>
     <ul class="simple-list">
-      <li><span>2025</span> AAPM (Oral) — Washington, DC</li>
-      <li><span>2024</span> ECMP (Oral) — Munich</li>
-      <li><span>2024</span> ICCR (Oral) — Lyon</li>
+      <li><span>2025</span> AAPM Annual Meeting (Oral Presentation) — Washington, DC</li>
+      <li><span>2024</span> European Congress of Medical Physics (Oral) — Munich</li>
+      <li><span>2024</span> International Conference on Computational Radiotherapy (Oral) — Lyon</li>
     </ul>
   </section>
 
   <section id="service">
-    <h2>Service</h2>
+    <h2>Academic Service</h2>
     <ul class="simple-list">
       <li><span>Reviewer</span> Medical Physics, Physics in Medicine & Biology, PhiRO</li>
       <li><span>Award</span> Chinese National Scholarship (2022)</li>
@@ -434,17 +509,15 @@ footer{
   </section>
 
   <footer>
-    © <span id="year"></span> Fan Xiao | Munich
+    © <span id="year"></span> Fan Xiao · Munich, Germany
   </footer>
 </main>
 
 <script>
-// 主题切换
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 const html = document.documentElement;
 
-// 检查本地存储的主题
 const savedTheme = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', savedTheme);
 themeIcon.innerHTML = savedTheme === 'light' ? '<div class="moon"></div>' : '<div class="sun"></div>';
@@ -458,7 +531,6 @@ themeToggle.addEventListener('click', () => {
   themeIcon.innerHTML = newTheme === 'light' ? '<div class="moon"></div>' : '<div class="sun"></div>';
 });
 
-// 年份
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
