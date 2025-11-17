@@ -410,6 +410,30 @@ footer{
   .news-item{flex-direction:column;gap:4px}
   .news-date{min-width:auto}
 }
+
+/* BibTeX copy toast */
+.copy-toast{
+  position:fixed;
+  left:50%;
+  bottom:32px;
+  transform:translateX(-50%) translateY(8px);
+  padding:8px 16px;
+  border-radius:999px;
+  background:var(--surface);
+  color:var(--text-bright);
+  border:1px solid var(--accent);
+  font-size:13px;
+  font-family:"Inter",-apple-system,sans-serif;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease;
+  z-index:200;
+}
+
+.copy-toast--visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
 </style>
 </head>
 <body>
@@ -563,17 +587,19 @@ footer{
   </footer>
 </main>
 
+<div id="copyToast" class="copy-toast">BibTeX copied!</div>
+
 <script type="text/plain" id="bib-mrdose">
-      @article{xiao2025deep,
-        title={Deep learning-based synthetic-CT-free photon dose calculation in MR-guided radiotherapy: A proof-of-concept study},
-        author={Xiao, Fan and Radonic, Domagoj and Wahl, Niklas and Delopoulos, Nikolaos and Thummerer, Adrian and Corradini, Stefanie and Belka, Claus and Dedes, George and Kurz, Christopher and Landry, Guillaume},
-        journal={Medical physics},
-        volume={52},
-        number={11},
-        pages={e70106},
-        year={2025},
-        publisher={Wiley Online Library}
-      }
+@article{xiao2025deep,
+  title={Deep learning-based synthetic-CT-free photon dose calculation in MR-guided radiotherapy: A proof-of-concept study},
+  author={Xiao, Fan and Radonic, Domagoj and Wahl, Niklas and Delopoulos, Nikolaos and Thummerer, Adrian and Corradini, Stefanie and Belka, Claus and Dedes, George and Kurz, Christopher and Landry, Guillaume},
+  journal={Medical physics},
+  volume={52},
+  number={11},
+  pages={e70106},
+  year={2025},
+  publisher={Wiley Online Library}
+}
 </script>
 
 <script type="text/plain" id="bib-pg">
@@ -602,9 +628,6 @@ footer{
 }
 </script>
 
-
-
-
 <script>
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
@@ -625,6 +648,19 @@ themeToggle.addEventListener('click', () => {
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// BibTeX copy toast
+const copyToast = document.getElementById('copyToast');
+let copyToastTimer = null;
+
+function showCopyToast() {
+  if (!copyToast) return;
+  copyToast.classList.add('copy-toast--visible');
+  if (copyToastTimer) clearTimeout(copyToastTimer);
+  copyToastTimer = setTimeout(() => {
+    copyToast.classList.remove('copy-toast--visible');
+  }, 1500);
+}
+
 // BibTeX copy buttons
 document.querySelectorAll('.bibtex-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
@@ -636,15 +672,12 @@ document.querySelectorAll('.bibtex-btn').forEach(btn => {
     if (!bib) return;
 
     navigator.clipboard.writeText(bib).then(() => {
-      const originalText = btn.textContent;
-      btn.textContent = 'Copied!';
-      setTimeout(() => { btn.textContent = originalText; }, 1200);
+      showCopyToast();
     }).catch(err => {
       console.error('Clipboard copy failed:', err);
     });
   });
 });
-
 </script>
 </body>
 </html>
