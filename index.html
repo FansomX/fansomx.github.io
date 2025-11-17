@@ -637,7 +637,7 @@ document.querySelectorAll('.bibtex-btn').forEach(btn => {
 
     navigator.clipboard.writeText(bib).then(() => {
       const originalText = btn.textContent;
-      btn.textContent = 'BibTeX Copied!';
+      btn.textContent = 'Copied!';
       setTimeout(() => { btn.textContent = originalText; }, 1200);
     }).catch(err => {
       console.error('Clipboard copy failed:', err);
