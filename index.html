@@ -467,7 +467,7 @@ footer{
           <div class="pub-links">
             <a href="https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.70106" class="pub-link" target="_blank">DOI</a>
             <a href="assets/MRdose.pdf" class="pub-link" target="_blank">PDF</a>
-            <a href="assets/MRdose.bib" class="pub-link" target="_blank">BibTeX</a>
+            <a href="#" class="pub-link bibtex-btn" data-bib-id="bib-mrdose">BibTeX</a>
           </div>
         </div>
       </li>
@@ -481,7 +481,7 @@ footer{
           <div class="pub-links">
             <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad8e2a" class="pub-link" target="_blank">DOI</a>
             <a href="assets/PG.pdf" class="pub-link" target="_blank">PDF</a>
-            <a href="assets/PG.bib" class="pub-link" target="_blank">BibTeX</a>
+            <a href="#" class="pub-link bibtex-btn" data-bib-id="bib-pg">BibTeX</a>
           </div>
         </div>
       </li>
@@ -495,7 +495,7 @@ footer{
           <div class="pub-links">
             <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad7f1e" class="pub-link" target="_blank">DOI</a>
             <a href="assets/proton_Bfield.pdf" class="pub-link" target="_blank">PDF</a>
-            <a href="assets/proton_Bfield.bib" class="pub-link" target="_blank">BibTeX</a>
+            <a href="#" class="pub-link bibtex-btn" data-bib-id="bib-proton-bfield">BibTeX</a>
           </div>
         </div>
       </li>
@@ -563,6 +563,48 @@ footer{
   </footer>
 </main>
 
+<script type="text/plain" id="bib-mrdose">
+      @article{xiao2025deep,
+        title={Deep learning-based synthetic-CT-free photon dose calculation in MR-guided radiotherapy: A proof-of-concept study},
+        author={Xiao, Fan and Radonic, Domagoj and Wahl, Niklas and Delopoulos, Nikolaos and Thummerer, Adrian and Corradini, Stefanie and Belka, Claus and Dedes, George and Kurz, Christopher and Landry, Guillaume},
+        journal={Medical physics},
+        volume={52},
+        number={11},
+        pages={e70106},
+        year={2025},
+        publisher={Wiley Online Library}
+      }
+</script>
+
+<script type="text/plain" id="bib-pg">
+@article{xiao2024prompt,
+  title={Prompt gamma emission prediction using a long short-term memory network},
+  author={Xiao, Fan and Radonic, Domagoj and Kriechbaum, Michael and Wahl, Niklas and Neishabouri, Ahmad and Delopoulos, Nikolaos and Parodi, Katia and Corradini, Stefanie and Belka, Claus and Kurz, Christopher and others},
+  journal={Physics in Medicine \& Biology},
+  volume={69},
+  number={23},
+  pages={235003},
+  year={2024},
+  publisher={IOP Publishing}
+}
+</script>
+
+<script type="text/plain" id="bib-proton-bfield">
+@article{radonic2024proton,
+  title={Proton dose calculation with LSTM networks in presence of a magnetic field},
+  author={Radonic, Domagoj and Xiao, Fan and Wahl, Niklas and Voss, Luke and Neishabouri, Ahmad and Delopoulos, Nikolaos and Marschner, Sebastian and Corradini, Stefanie and Belka, Claus and Dedes, George and others},
+  journal={Physics in Medicine \& Biology},
+  volume={69},
+  number={21},
+  pages={215019},
+  year={2024},
+  publisher={IOP Publishing}
+}
+</script>
+
+
+
+
 <script>
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
@@ -582,6 +624,27 @@ themeToggle.addEventListener('click', () => {
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// BibTeX copy buttons
+document.querySelectorAll('.bibtex-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const id  = btn.getAttribute('data-bib-id');
+    const el  = document.getElementById(id);
+    if (!el) return;
+    const bib = el.textContent.trim();
+    if (!bib) return;
+
+    navigator.clipboard.writeText(bib).then(() => {
+      const originalText = btn.textContent;
+      btn.textContent = 'BibTeX Copied!';
+      setTimeout(() => { btn.textContent = originalText; }, 1200);
+    }).catch(err => {
+      console.error('Clipboard copy failed:', err);
+    });
+  });
+});
+
 </script>
 </body>
 </html>
