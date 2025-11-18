@@ -281,55 +281,60 @@ h2{
   margin-right:8px;
 }
 
-/* ==== Publication buttons (DOI / PDF / BibTeX) ==== */
+/* ==== Publication / talk buttons ==== */
+
 .pub-links{
-  margin-top:12px;
+  margin-top:10px;
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
+  gap:8px;
 }
 
-/* Base style: DOI / PDF / BibTeX / Slides */
+/* base buttons: DOI / PDF / BibTeX / Slides */
 .pub-link,
 .talk-link{
   display:inline-flex;
   align-items:center;
   gap:6px;
-  padding:6px 14px;
-  border-radius:999px;
-  border:1px solid rgba(100,255,218,.45);
-  background:rgba(100,255,218,.06);
+  padding:5px 12px;
+  border-radius:5px;
+  border:1px solid rgba(148,163,184,.4);
+  background:rgba(15,23,42,.9);
   font-size:12px;
   font-family:"JetBrains Mono",monospace;
   color:var(--text-bright);
-  letter-spacing:0.03em;
-  text-transform:uppercase;
-  transition:.18s ease-out;
+  line-height:1;
+  letter-spacing:0.02em;
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    transform .15s ease;
 }
 
 .pub-link:hover,
 .talk-link:hover{
   border-color:var(--accent);
-  background:rgba(100,255,218,.14);
+  background:rgba(100,255,218,.06);
   color:var(--accent);
-  transform:translateY(-0.5px);
+  transform:translateY(-1px);
 }
 
-/* Primary buttons: PDF / Slides */
+/* primary: PDF & Slides */
 .pub-link--primary,
 .talk-link--primary{
-  border-color:var(--accent);
-  background:var(--accent);
-  color:#020617;
+  border-color:rgba(100,255,218,.75);
+  background:rgba(15,23,42,1);
+  color:var(--accent);
+  font-weight:500;
 }
 
 .pub-link--primary:hover,
 .talk-link--primary:hover{
-  filter:brightness(1.05);
-  transform:translateY(-1px);
+  background:rgba(100,255,218,.08);
 }
 
-/* External link subtle arrow (DOI) */
+/* external DOI arrow */
 .pub-link[href^="http"][href*="doi"],
 .pub-link[href^="https://iopscience"],
 .pub-link[href^="https://aapm.onlinelibrary"]{
@@ -341,14 +346,14 @@ h2{
 .pub-link[href^="https://aapm.onlinelibrary"]::after{
   content:"↗";
   font-size:11px;
-  opacity:0.7;
+  opacity:0.6;
 }
 
 /* BibTeX copy icon */
 .bibtex-btn::before{
   content:"⧉";
   font-size:11px;
-  opacity:0.8;
+  opacity:0.75;
 }
 
 /* News & simple lists */
