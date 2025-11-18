@@ -43,7 +43,7 @@ body{
   background:var(--bg);
   color:var(--text);
   font:16px/1.6 "Inter",-apple-system,sans-serif;
-  -webkit-font-smoothing:antialiased
+  -webkit-font-smoothing:antialiased;
 }
 a{color:var(--accent);text-decoration:none;transition:.2s}
 a:hover{opacity:.8}
@@ -303,30 +303,31 @@ h2{
   background:rgba(100,255,218,.08);
 }
 
-/* light-theme overrides for buttons */
+/* light-theme overrides: 更低调、无填充 */
 [data-theme="light"] .pub-link,
 [data-theme="light"] .talk-link{
-  border-color:rgba(148,163,184,.6);
-  background:#e5edf5;
-  color:#0f172a;
+  border-color:rgba(148,163,184,.7);
+  background:#ffffff;
+  color:var(--text);
+  letter-spacing:0.01em;
 }
 [data-theme="light"] .pub-link:hover,
 [data-theme="light"] .talk-link:hover{
   border-color:var(--accent);
-  background:#dbeafe;
+  background:#f1f5f9;
   color:var(--accent);
 }
 [data-theme="light"] .pub-link--primary,
 [data-theme="light"] .talk-link--primary{
   border-color:var(--accent);
-  background:var(--accent);
-  color:#f9fafb;
+  background:#ffffff;
+  color:var(--accent);
+  font-weight:500;
 }
 [data-theme="light"] .pub-link--primary:hover,
 [data-theme="light"] .talk-link--primary:hover{
-  filter:brightness(0.95);
-  background:var(--accent);
-  color:#f9fafb;
+  background:#e5f3fb;
+  color:var(--accent);
 }
 
 /* external DOI arrow */
