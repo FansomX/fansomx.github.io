@@ -281,28 +281,77 @@ h2{
   margin-right:8px;
 }
 
+/* ==== Publication buttons (DOI / PDF / BibTeX) ==== */
 .pub-links{
-  margin-top:10px;
+  margin-top:12px;
   display:flex;
-  gap:8px;
   flex-wrap:wrap;
+  gap:10px;
 }
 
-.pub-link{
-  padding:5px 14px;
-  border:1px solid var(--border);
-  border-radius:4px;
+/* Base style: DOI / PDF / BibTeX / Slides */
+.pub-link,
+.talk-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 14px;
+  border-radius:999px;
+  border:1px solid rgba(100,255,218,.45);
+  background:rgba(100,255,218,.06);
   font-size:12px;
   font-family:"JetBrains Mono",monospace;
-  color:var(--text);
-  transition:.2s;
+  color:var(--text-bright);
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  transition:.18s ease-out;
 }
 
-.pub-link:hover{
+.pub-link:hover,
+.talk-link:hover{
   border-color:var(--accent);
+  background:rgba(100,255,218,.14);
   color:var(--accent);
+  transform:translateY(-0.5px);
 }
 
+/* Primary buttons: PDF / Slides */
+.pub-link--primary,
+.talk-link--primary{
+  border-color:var(--accent);
+  background:var(--accent);
+  color:#020617;
+}
+
+.pub-link--primary:hover,
+.talk-link--primary:hover{
+  filter:brightness(1.05);
+  transform:translateY(-1px);
+}
+
+/* External link subtle arrow (DOI) */
+.pub-link[href^="http"][href*="doi"],
+.pub-link[href^="https://iopscience"],
+.pub-link[href^="https://aapm.onlinelibrary"]{
+  position:relative;
+}
+
+.pub-link[href^="http"][href*="doi"]::after,
+.pub-link[href^="https://iopscience"]::after,
+.pub-link[href^="https://aapm.onlinelibrary"]::after{
+  content:"↗";
+  font-size:11px;
+  opacity:0.7;
+}
+
+/* BibTeX copy icon */
+.bibtex-btn::before{
+  content:"⧉";
+  font-size:11px;
+  opacity:0.8;
+}
+
+/* News & simple lists */
 .news-list{list-style:none}
 .news-item{
   display:flex;
@@ -325,34 +374,20 @@ h2{
   line-height:1.8;
 }
 
-.simple-list li{margin-bottom:8px}
+.simple-list li{margin-bottom:12px}
 
 .simple-list span{
   color:var(--accent);
   font-family:"JetBrains Mono",monospace;
   font-size:13px;
-  margin-right:8px;
+  margin-right:10px;
 }
 
+/* Talk links container */
 .talk-links{
   display:inline-flex;
   gap:6px;
   margin-left:8px;
-}
-
-.talk-link{
-  padding:2px 8px;
-  border:1px solid var(--border);
-  border-radius:3px;
-  font-size:11px;
-  font-family:"JetBrains Mono",monospace;
-  color:var(--text);
-  transition:.2s;
-}
-
-.talk-link:hover{
-  border-color:var(--accent);
-  color:var(--accent);
 }
 
 footer{
@@ -490,7 +525,7 @@ footer{
           <div><span class="pub-venue">Medical Physics 2025</span></div>
           <div class="pub-links">
             <a href="https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.70106" class="pub-link" target="_blank">DOI</a>
-            <a href="assets/MRdose.pdf" class="pub-link" target="_blank">PDF</a>
+            <a href="assets/MRdose.pdf" class="pub-link pub-link--primary" target="_blank">PDF</a>
             <a href="#" class="pub-link bibtex-btn" data-bib-id="bib-mrdose">BibTeX</a>
           </div>
         </div>
@@ -504,7 +539,7 @@ footer{
           <div><span class="pub-venue">Phys. Med. Biol. 2024</span></div>
           <div class="pub-links">
             <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad8e2a" class="pub-link" target="_blank">DOI</a>
-            <a href="assets/PG.pdf" class="pub-link" target="_blank">PDF</a>
+            <a href="assets/PG.pdf" class="pub-link pub-link--primary" target="_blank">PDF</a>
             <a href="#" class="pub-link bibtex-btn" data-bib-id="bib-pg">BibTeX</a>
           </div>
         </div>
@@ -518,7 +553,7 @@ footer{
           <div><span class="pub-venue">Phys. Med. Biol. 2024</span></div>
           <div class="pub-links">
             <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ad7f1e" class="pub-link" target="_blank">DOI</a>
-            <a href="assets/proton_Bfield.pdf" class="pub-link" target="_blank">PDF</a>
+            <a href="assets/proton_Bfield.pdf" class="pub-link pub-link--primary" target="_blank">PDF</a>
             <a href="#" class="pub-link bibtex-btn" data-bib-id="bib-proton-bfield">BibTeX</a>
           </div>
         </div>
@@ -550,19 +585,19 @@ footer{
       <li>
         <span>2025</span> AAPM Annual Meeting (Oral Presentation) — Washington, D.C.
         <span class="talk-links">
-          <a href="assets/AAPM2025.pdf" class="talk-link" target="_blank">Slides</a>
+          <a href="assets/AAPM2025.pdf" class="talk-link talk-link--primary" target="_blank">Slides</a>
         </span>
       </li>
       <li>
         <span>2024</span> European Congress of Medical Physics (Oral Presentation) — Munich
         <span class="talk-links">
-          <a href="assets/ECMP2024.pdf" class="talk-link" target="_blank">Slides</a>
+          <a href="assets/ECMP2024.pdf" class="talk-link talk-link--primary" target="_blank">Slides</a>
         </span>
       </li>
       <li>
         <span>2024</span> International Conference on Computational Radiotherapy (Oral Presentation) — Lyon
         <span class="talk-links">
-          <a href="assets/ICCR2024.pdf" class="talk-link" target="_blank">Slides</a>
+          <a href="assets/ICCR2024.pdf" class="talk-link talk-link--primary" target="_blank">Slides</a>
         </span>
       </li>
     </ul>
