@@ -166,24 +166,25 @@ h1{
   font-weight:bold;
 }
 .links{
-  display:flex;
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:10px;
   font-size:13px;
   margin-top:20px;
 }
 .links a{
   color:var(--text);
-  padding:10px 16px;
+  padding:12px 16px;
   border:1px solid var(--border);
   border-radius:6px;
   font-family:"JetBrains Mono",monospace;
   text-align:center;
   transition:.2s;
-  flex:1;
   display:flex;
   align-items:center;
   justify-content:center;
   gap:8px;
+  min-height:60px;
 }
 .links a:hover{
   border-color:var(--accent);
@@ -439,6 +440,9 @@ footer{
   .content{padding:48px 24px}
   .news-item{flex-direction:column;gap:4px}
   .news-date{min-width:auto}
+  .links{
+    grid-template-columns:1fr;
+  }
 }
 
 /* BibTeX copy toast */
