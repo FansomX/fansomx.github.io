@@ -486,7 +486,7 @@ footer{
   <ul class="research-list">
     <li>AI-accelerated Dose Calculation</li>
     <li>Photon/proton Monte Carlo Simulation</li>
-    <li>MRI/CT/CBCT segmentation/registration </li>
+    <li>MRI/CT segmentation/registration </li>
   </ul>
   <p class="subtitle">Before my PhD, I obtained my Master's in Biomedical Engineering from Southern Medical University and my Bachelor's in Communication Engineering from Wuhan University of Technology.</p>
   <div class="links">
@@ -519,7 +519,7 @@ footer{
 
 <main class="content">
   <section id="research">
-    <h2>Recent Research</h2>
+    <h2>Recent Publication</h2>
     <ol class="pub-list">
 
       <li class="pub">
@@ -547,6 +547,7 @@ footer{
             <a href="https://iopscience.iop.org/article/10.1088/1361-6560/ae6413" class="pub-link" target="_blank">DOI</a>
             <a href="assets/VMAT_Dose_Comparison.pdf" class="pub-link pub-link--primary" target="_blank">PDF</a>
             <a href="https://github.com/LMUK-RADONC-PHYS-RES/DL-segment-dose-calculation" class="pub-link" target="_blank">Code</a>
+            <a href="#" class="pub-link bibtex-btn" data-bib-id="bib-vmat">BibTeX</a>
           </div>
         </div>
       </li>
@@ -599,12 +600,12 @@ footer{
     <h2>News</h2>
     <ul class="news-list">
       <li class="news-item">
-        <span class="news-date">Apr 2026</span>
-        <span>Published VMAT dose calculation comparison paper in Physics in Medicine & Biology</span>
+        <span class="news-date">Oct 2026</span>
+        <span>Published DoseRAD2026 dataset paper in Medical Physics</span>
       </li>
       <li class="news-item">
         <span class="news-date">Apr 2026</span>
-        <span>Published MICCAI DoseRAD2026 Grand Challenge Dataset</span>
+        <span>Published VMAT dose calculation comparison paper in Physics in Medicine & Biology</span>
       </li>
       <li class="news-item">
         <span class="news-date">Nov 2025</span>
@@ -622,22 +623,34 @@ footer{
   </section>
 
   <section id="talks">
-    <h2>Selected Talks</h2>
+    <h2>Conferences</h2>
     <ul class="simple-list">
       <li>
-        <span>2025</span> AAPM Annual Meeting (Oral Presentation) — Washington, D.C.
+        <span>2026</span> MICCAI (Satellite Event) — Strasbourg
+        <span class="talk-links">
+          <a href="assets/MICCAI2026.pdf" class="talk-link talk-link--primary" target="_blank">Slides</a>
+        </span>
+      </li>
+      <li>
+        <span>2026</span> ESTRO (Poster Discussion) — Stockholm
+        <span class="talk-links">
+          <a href="assets/ESTRO2026.pdf" class="talk-link talk-link--primary" target="_blank">Slide</a>
+        </span>
+      </li>
+      <li>
+        <span>2025</span> AAPM (Oral Presentation) — Washington, D.C.
         <span class="talk-links">
           <a href="assets/AAPM2025.pdf" class="talk-link talk-link--primary" target="_blank">Slides</a>
         </span>
       </li>
       <li>
-        <span>2024</span> European Congress of Medical Physics (Oral Presentation) — Munich
+        <span>2024</span> ECMP (Oral Presentation) — Munich
         <span class="talk-links">
           <a href="assets/ECMP2024.pdf" class="talk-link talk-link--primary" target="_blank">Slides</a>
         </span>
       </li>
       <li>
-        <span>2024</span> International Conference on Computational Radiotherapy (Oral Presentation) — Lyon
+        <span>2024</span> ICCR (Oral Presentation) — Lyon
         <span class="talk-links">
           <a href="assets/ICCR2024.pdf" class="talk-link talk-link--primary" target="_blank">Slides</a>
         </span>
@@ -665,6 +678,32 @@ footer{
 </main>
 
 <div id="copyToast" class="copy-toast">BibTeX copied!</div>
+
+<script type="text/plain" id="bib-doserad">
+@article{xiao2026doserad2026,
+  title={DoseRAD2026: A benchmark dataset for AI-accelerated photon and proton dose calculation in radiotherapy},
+  author={Xiao, Fan and Delopoulos, Nikolaos and Wahl, Niklas and Volz, Lennart and Bucher, Lina and Maspero, Matteo and Palacios, Miguel and Li, Muheng and Schulz, Samir and Rogowski, Viktor and others},
+  journal={Medical Physics},
+  volume={53},
+  number={11},
+  pages={e70714},
+  year={2026},
+  publisher={Wiley Online Library}
+}
+</script>
+
+<script type="text/plain" id="bib-vmat">
+@article{xiao2026multi,
+  title={Multi-model study of fast VMAT segment dose calculation with deep learning},
+  author={Xiao, Fan and Wahl, Niklas and Belka, Claus and Kurz, Christopher and Dedes, George and Landry, Guillaume},
+  journal={Physics in Medicine \& Biology},
+  volume={71},
+  number={9},
+  pages={095015},
+  year={2026},
+  publisher={IOP Publishing}
+}
+</script>
 
 <script type="text/plain" id="bib-mrdose">
 @article{xiao2025deep,
@@ -702,15 +741,6 @@ footer{
   pages={215019},
   year={2024},
   publisher={IOP Publishing}
-}
-</script>
-
-<script type="text/plain" id="bib-doserad">
-@article{xiao2026doserad2026,
-  title={DoseRAD2026 Challenge dataset: AI accelerated photon and proton dose calculation for radiotherapy},
-  author={Xiao, Fan and Delopoulos, Nikolaos and Wahl, Niklas and Volz, Lennart and Bucher, Lina and Maspero, Matteo and Palacios, Miguel and Li, Muheng and Schulz, Samir and Rogowski, Viktor and others},
-  journal={arXiv preprint arXiv:2604.12778},
-  year={2026}
 }
 </script>
 
